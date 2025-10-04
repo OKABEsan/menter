@@ -6,11 +6,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-@Entity  // これはデータベースのテーブルを表しています
+@Entity  //データベースとDBのテーブルと繋がる
 @Table(name = "Users")  // このクラスが対応するテーブルの名前は "Users" です
 public class User {
 	 @Id  // これが各ユーザを一意に識別するためのIDとなります
-	    @GeneratedValue(strategy = GenerationType.IDENTITY)  // IDは自動的に増加します
+	    @GeneratedValue(strategy = GenerationType.IDENTITY)  // IDは自動的に増加します(自動で連番をふること）
 	    @Column(name = "id")  // データベースに合わせてカラム名を修正
 	    private Integer id;
 

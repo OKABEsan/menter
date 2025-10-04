@@ -2,7 +2,7 @@ package com.example.demo.model;
 
 import jakarta.validation.constraints.NotEmpty;
 /**
- * ユーザーのデータを扱うためのクラス
+ * ユーザーのデータを一時的に保持し受け渡しをするクラス
  */
 public class UserDto {
 	@NotEmpty // ユーザー名は空であってはならないというルール
