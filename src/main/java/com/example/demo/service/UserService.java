@@ -14,7 +14,7 @@ import com.example.demo.model.User;
 import com.example.demo.model.UserDto;
 import com.example.demo.repository.UserRepository;
 
-@Service // このクラスがサービス層のクラスであることを示します
+@Service // ServiceクラスだよとSpringnに教える
 public class UserService implements UserDetailsService { // UserDetailsServiceインターフェースを実装しています
 
 	@Autowired // Springが自動的にUserRepositoryの実装を注入します
@@ -25,6 +25,7 @@ public class UserService implements UserDetailsService { // UserDetailsService�
 
 	@Override // UserDetailsServiceインターフェースのメソッドを上書きします
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		
 		User user = userRepository.findByUsername(username); // ユーザー名でユーザーを検索します
 		if (user == null) {
 			throw new UsernameNotFoundException("User not found"); // ユーザーが見つからない場合、例外をスローします
@@ -39,9 +40,12 @@ public class UserService implements UserDetailsService { // UserDetailsService�
 
 	@Transactional // トランザクションを開始します。メソッドが終了したらトランザクションがコミットされます。
 	public void save(UserDto userDto) {
+		
+		
 		// UserDtoからUserへの変換
 		User user = new User();
 		user.setUsername(userDto.getUsername());
+		
 		// パスワードをハッシュ化してから保存
 		user.setPassword(passwordEncoder.encode(userDto.getPassword()));
 		user.setEmail(userDto.getEmail());
