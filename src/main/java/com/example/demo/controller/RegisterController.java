@@ -29,7 +29,9 @@ public class RegisterController {
 
 	@PostMapping("/register") // "/register"というURLに対するPOSTリクエストを処理します
 	public String register(@ModelAttribute UserDto userDto) {
+		
 		User existing = userService.findByUsername(userDto.getUsername()); // ユーザー名で既存のユーザーを検索します
+		
 		if (existing != null) {
 			// ユーザーが既に存在する場合の処理
 			return "register"; // ユーザーが存在するため、再度登録画面を表示します
