@@ -20,21 +20,23 @@ public class LoginController {
 
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
+		//ログイン認証が空ではないかつログイン認証された場合
 		if (authentication != null && authentication.isAuthenticated()) {
-
+			//HTMLへ移動する
 			return "redirect:/index";
 
 		}
 
+		//そうでなければログインへ移動する
 		return "redirect:/login";
 
 	}
 
-	@GetMapping("/index")
+	@GetMapping("/index") //URLごとに処理するメソッドを指定する。
 
 	public String index() {
 
-		return "index";
+		return "index";//HTMLを表示
 	}
 
 }
