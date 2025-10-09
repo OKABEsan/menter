@@ -34,6 +34,7 @@ public class RegisterController {
 		
 		if (existing != null) {
 			// ユーザーが既に存在する場合の処理
+			System.out.println("既存ユーザー情報あり：" + existing);
 			return "register"; // ユーザーが存在するため、再度登録画面を表示します
 		}
 		userService.save(userDto); // ユーザーが存在しない場合、新しいユーザーを保存します
