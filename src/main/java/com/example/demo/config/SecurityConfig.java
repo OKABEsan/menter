@@ -44,7 +44,7 @@ public class SecurityConfig {
 					//フォームを使ったログイン設定
 					.formLogin(login -> login
 							//HTMlフォームのinput name="email"をユーザー名として扱う
-							.usernameParameter("email")
+							.usernameParameter("username")
 							//HTMlフォームのinput name="password"をパスワードとして扱う
 							.passwordParameter("password")
 							//ログインフォームの送信先URL
