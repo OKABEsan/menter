@@ -54,7 +54,7 @@ public class SecurityConfig {
 							//ログイン失敗時の遷移先
 							.failureUrl("/login?error")
 							//ログイン成功時の遷移先
-							.defaultSuccessUrl("/home")
+							.defaultSuccessUrl("/index")
 							//ログインページやエラー画面は誰でも見られる
 							.permitAll())
 					//ログアウト用のURL

@@ -1,12 +1,18 @@
 package com.example.demo.controller; // このファイルが属するパッケージ（フォルダ）
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import com.example.demo.repository.UserRepository;
 
 @Controller //WebリクエストをSpringに処理してもらうための入口
 public class LoginController {
+	@Autowired //自動でSQL操作クラスを作成
+	private UserRepository userRepository;
 
 	@GetMapping("/login") //URLと実行するメソッドを結びつけるための仕組み。
 
@@ -34,9 +40,13 @@ public class LoginController {
 
 	@GetMapping("/index") //URLごとに処理するメソッドを指定する。
 
-	public String index() {
+	//modelにデータを入れて
+	public String index(Model model) {
 
-		return "index";//HTMLを表示
+		//modelにuserデータベース全てを受け渡す
+		model.addAttribute("user", userRepository.findAll());
+		return "index";
+
 	}
 
 }
