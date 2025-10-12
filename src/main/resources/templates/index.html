@@ -5,6 +5,20 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>テスト</h1>
+  <div class=esaImg>
+    <img class=esa src="/img/logo.png"alt="ESA画像">
+  </div>
+<table border="1">
+	<tr>
+		<th>ID</th>
+		<th>	username</th>
+		<th>email</th>
+	</tr>
+	 <tr th:each="user:${user}">
+		<td th:text="${user.id}"></td>
+		<td th:text="${user.username}"></td>
+		<td th:text="${user.email}"></td>
+	</tr>
+		</table>
 </body>
 </html>
