@@ -37,6 +37,7 @@ public class SecurityConfig {
 					.authorizeHttpRequests(auth -> auth
 							//静的リソース(CSS,JS,画像など)は全てアクセス許可
 							.requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+							.requestMatchers("/css/**","/js/**","/img/**").permitAll()
 							//"/login"と"/register"はログインしていなくてもアクセスOK
 							.requestMatchers("/login", "register").permitAll()
 							//それ以外のURLは全て認証(ログイン)済みのユーザーのみアクセス可能

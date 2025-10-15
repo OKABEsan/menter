@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet"th:href="@{/css/style.css}">
 </head>
 <body>
   <div class="esaImg">
@@ -10,14 +11,20 @@
   </div>
 <table border="1">
 	<tr>
-		<th>ID</th>
-		<th>	username</th>
+		<th>名前	</th>
+		<th>年齢</th>
 		<th>email</th>
+		<th>生年月日</th>
+		<th>TEL</th>
+		<th>プラン名</th>
 	</tr>
 	 <tr th:each="user:${user}">
-		<td th:text="${user.id}"></td>
 		<td th:text="${user.username}"></td>
+		<td th:text="${user.age}"></td>
 		<td th:text="${user.email}"></td>
+		<td th:text="${user.birthday}"></td>
+		<td th:text="${user.tel}"></td>
+		<td th:text="${user.plan}"></td>
 	</tr>
 		</table>
 </body>
