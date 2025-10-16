@@ -99,7 +99,7 @@ public class User {
 		this.tel = tel;
 	}
 
-	public void plan(String plan) {
+	public void setPlan(String plan) {
 		this.plan = plan;
 	}
 }

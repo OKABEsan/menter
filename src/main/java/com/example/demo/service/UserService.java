@@ -45,7 +45,10 @@ public class UserService implements UserDetailsService { // UserDetailsService�
 		// UserDtoからUserへの変換
 		User user = new User();
 		user.setUsername(userDto.getUsername());
-		
+		user.setAge(userDto.getAge());
+		user.setBirthday(userDto.getBirthday());
+		user.setTel(userDto.getTel());
+		user.setPlan(userDto.getPlan());
 		// パスワードをハッシュ化してから保存
 		user.setPassword(passwordEncoder.encode(userDto.getPassword()));
 		user.setEmail(userDto.getEmail());
