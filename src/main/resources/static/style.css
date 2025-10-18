@@ -14,3 +14,21 @@ body{
 		height:100%;
 		background-color:blue;
 	}
+	.table{
+		width:100%;
+		border-bottom:none;
+		border-left:none;
+		
+	}
+	
+	tr:last-child td{
+		border-bottom:none!important;
+	}
+	
+	th,td{
+		text-align:left;
+		border-top:1px solid #dee2e6;
+	    border-bottom:2px solid #dee2e6;
+		border-left:none;
+		border-right:none;
+		]
