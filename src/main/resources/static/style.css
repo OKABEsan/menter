@@ -10,14 +10,18 @@ body{
 }
 	
 	.esa{
-		width:100px;
+		width:auto;
 		height:100%;
 		background-color:blue;
+	}
+	.main-content{
+		width:100%;
 	}
 	.table{
 		width:100%;
 		border-bottom:none;
 		border-left:none;
+		border-right:none;
 		
 	}
 	
