@@ -13,6 +13,9 @@ import com.example.demo.model.UserDto;
 import com.example.demo.service.UserService;
 
 @Controller // このクラスがWebコントローラーであることを示します
+/**
+ * 新規登録の入力を受け、処理するクラス
+ */
 public class RegisterController {
 
 	// Spring が自動的に UserService の実装を注入します
@@ -20,6 +23,10 @@ public class RegisterController {
 	private UserService userService;
 
 	@GetMapping("/register") // "/register"というURLに対するGETリクエストを処理します
+	/**
+	 * データと画面を繋ぐ
+	 * @return mav
+	 */
 	public ModelAndView registerForm() {
 		ModelAndView mav = new ModelAndView(); // ModelAndViewオブジェクトを作成します
 		mav.addObject("user", new UserDto()); // 新しいUserDtoオブジェクトを"ユーザー"という名前で追加します
@@ -28,6 +35,11 @@ public class RegisterController {
 	}
 
 	@PostMapping("/register") // "/register"というURLに対するPOSTリクエストを処理します
+	/**
+	 * 入力された一時的に保持されたデータを認証し処理する
+	 * @param userDto
+	 * @return register login
+	 */
 	public String register(@ModelAttribute UserDto userDto) {
 		
 		User existing = userService.findByUsername(userDto.getUsername()); // ユーザー名で既存のユーザーを検索します

@@ -11,7 +11,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 // Userクラスを使うためにインポートしています
 import com.example.demo.model.User;
 
-// UserDetailsインターフェースを実装したUserPrincipalというクラスを作成します。これはSpring Securityでユーザー情報を扱うためのクラスです。
+/*
+ * ログインしているユーザーの情報を表すクラス
+ */
 public class UserPrincipal implements UserDetails {
 
 	private User user; // Userオブジェクトを保持します。

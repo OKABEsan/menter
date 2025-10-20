@@ -7,8 +7,14 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+import lombok.Data;
+
 @Entity //データベースとDBのテーブルと繋がる
 @Table(name = "user") // このクラスが対応するテーブルの名前は "user" です
+/**
+ * データベースのテーブルとその中身を表すクラス
+ */
+@Data
 public class User {
 	@Id // これが各ユーザを一意に識別するためのIDとなります
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // IDは自動的に増加します(自動で連番をふること）
@@ -41,65 +47,4 @@ public class User {
 		return this.id;
 	}
 
-	public String getUsername() {
-		return this.username;
-	}
-
-	public String getPassword() {
-		return this.password;
-	}
-
-	public String getEmail() {
-		return this.email;
-	}
-
-	public Integer getAge() {
-		return this.age;
-	}
-
-	public String getBirthday() {
-		return this.birthday;
-
-	}
-
-	public String getTel() {
-		return this.tel;
-	}
-
-	public String getPlan() {
-		return this.plan;
-	}
-
-	// 以下は各値を設定するためのメソッド（セッター）です。
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public void setAge(Integer age) {
-		this.age = age;
-	}
-
-	public void setBirthday(String birthday) {
-		this.birthday = birthday;
-	}
-
-	public void setTel(String tel) {
-		this.tel = tel;
-	}
-
-	public void setPlan(String plan) {
-		this.plan = plan;
-	}
 }

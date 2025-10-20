@@ -15,6 +15,9 @@ import com.example.demo.model.UserDto;
 import com.example.demo.repository.UserRepository;
 
 @Service // ServiceクラスだよとSpringnに教える
+/**
+ * 画面とデータベースの間でデータを橋渡しするクラス
+ */
 public class UserService implements UserDetailsService { // UserDetailsServiceインターフェースを実装しています
 
 	@Autowired // Springが自動的にUserRepositoryの実装を注入します
@@ -25,7 +28,7 @@ public class UserService implements UserDetailsService { // UserDetailsService�
 
 	@Override // UserDetailsServiceインターフェースのメソッドを上書きします
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		
+
 		User user = userRepository.findByUsername(username); // ユーザー名でユーザーを検索します
 		if (user == null) {
 			throw new UsernameNotFoundException("User not found"); // ユーザーが見つからない場合、例外をスローします

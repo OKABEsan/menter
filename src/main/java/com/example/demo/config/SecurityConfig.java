@@ -14,10 +14,16 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration //Springがアプリ起動時にSecurityConfigを自動的に読み込む。
 @EnableWebSecurity //URLごとのセキュリティを有効にする。
 @EnableMethodSecurity //メソッドごとのアクセス制御を有効化
+/**
+ * サイト全体のアクセスルール・認証の仕組み・パスワードの保護方法を決めるクラス
+ */
 public class SecurityConfig {
 
 	@Bean //メソッドの戻り値をSpringの管理下に置く
-	//パスワードを安全に保存・認証するための暗号化ツール
+	/**
+	 * パスワードを安全に保存・認証するための暗号化ツール
+	 * @return BCryptPasswordEncoder
+	 */
 	public PasswordEncoder passwordEncoder() {
 		//パスワードの暗号化クラス
 		return new BCryptPasswordEncoder();
@@ -25,10 +31,18 @@ public class SecurityConfig {
 
 	@Configuration
 	@Order(1) //どの順番で実行するかを指定する
+	/*:
+	 * 生徒のログイン設定のルールを指定するクラス
+	 */
 	public static class StudentConfigurationAdapter {
 
 		@Bean
-		//リクエスト（URL)が来た時にどんな順番で何をチェックするかをまとめたルールブック
+		/**
+		 * リクエスト（URL)が来た時にどんな順番で何をチェックするかをまとめたルールブック
+		 * @param http
+		 * @return http.build
+		 * @throws Exception
+		 */
 		public SecurityFilterChain configureStudent(HttpSecurity http) throws Exception {
 
 			http
