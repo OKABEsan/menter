@@ -53,8 +53,12 @@ public class SecurityConfig {
 							.requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
 							.requestMatchers("/style.css").permitAll()
 							.requestMatchers("/js/**","/img/**").permitAll()
-							//"/login"と"/register"はログインしていなくてもアクセスOK
+							//"/login"と"/register"は誰でもアクセスできる
 							.requestMatchers("/login", "register").permitAll()
+							//USERの人のみアクセスできる
+							.requestMatchers("user/**").hasRole("USER")
+							//ADMINの人のみアクセスできる
+							.requestMatchers("admin/**").hasRole("ADMIN")
 							//それ以外のURLは全て認証(ログイン)済みのユーザーのみアクセス可能
 							.anyRequest().authenticated())
 					//フォームを使ったログイン設定

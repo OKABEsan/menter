@@ -35,8 +35,9 @@ public class LoginController {
 	public String redirectToIndex() {
 
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-	
+	//ログイン済のユーザーがいるかどうかチェックをする
 		if (authentication != null && authentication.isAuthenticated()) {
+			
 			//HTMLへ移動する
 			return "redirect:/index";
 
