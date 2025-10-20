@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Register</title>
+</head>
+<body>
+    <h2>新規登録画面</h2>
+    <form th:action="@{/register}" method="post">
+        <label for="username">名前:</label><br>
+        <input type="text" id="username" name="username" required><br>
+		<label for="	age">年齢:</label><br>
+		<input type="age" id="age" name="age" required><br>
+		<label for="	birthday">生年月日:</label><br>
+		<input type="birthday" id="birthday" name="birthday" required><br>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br>
+		<label for="tel">TEL:</label><br>
+		<input type="tel" id="tel" name="tel" required><br>
+		<label for="planl">プラン名:</label><br>
+		<select type="plan" id="planl" name="plan" required>
+			<option value ="planSelect">---</option>
+			<option value ="STANDARD">STANDARD</option>
+			<option value ="PREMIUN">PREMIUM</option>
+			</select><br>
+		<label for="password">パスワード:</label><br>
+		<input type="password" id="password" name="password" required><br>
+        <input type="submit" value="新規登録">
+    </form>
+</body>
+</html>
+
