@@ -14,6 +14,7 @@ import lombok.Data;
 /**
  * データベースのテーブルとその中身を表すクラス
  */
+
 @Data
 public class User {
 	@Id // これが各ユーザを一意に識別するためのIDとなります
@@ -42,9 +43,7 @@ public class User {
 	@Column(name = "plan")
 	private String plan;
 
-	// 以下は各値を取得するためのメソッド（ゲッター）です。
-	public Integer getId() {
-		return this.id;
-	}
+	@Column(name = "role")
+	private String role;
 
 }

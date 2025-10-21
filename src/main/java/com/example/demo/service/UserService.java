@@ -28,10 +28,20 @@ public class UserService implements UserDetailsService { // UserDetailsService�
 
 	@Override // UserDetailsServiceインターフェースのメソッドを上書きします
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		// ユーザーが見つからない場合、例外をスローします
+		User user = userRepository.findByUsername(username);
 
-		User user = userRepository.findByUsername(username); // ユーザー名でユーザーを検索します
+		// ユーザーが見つからない場合、例外をスローします
 		if (user == null) {
-			throw new UsernameNotFoundException("User not found"); // ユーザーが見つからない場合、例外をスローします
+			throw new UsernameNotFoundException("User not found");
+		}
+		//権限と取得してきた役が生徒だった場合
+		if ("ROLE_USER".equals(user.getRole())) {
+			System.out.println("生徒一覧" + user.getUsername());
+		}
+		//権限と取得してきた役がメンターだった場合
+		else if ("ROLE_ADMIN".equals(user.getRole())) {
+			System.out.println("講師一覧" + user.getUsername());
 		}
 		return new UserPrincipal(user); // ユーザーが見つかった場合、UserPrincipalを作成し返します
 	}
@@ -43,8 +53,7 @@ public class UserService implements UserDetailsService { // UserDetailsService�
 
 	@Transactional // トランザクションを開始します。メソッドが終了したらトランザクションがコミットされます。
 	public void save(UserDto userDto) {
-		
-		
+
 		// UserDtoからUserへの変換
 		User user = new User();
 		user.setUsername(userDto.getUsername());
