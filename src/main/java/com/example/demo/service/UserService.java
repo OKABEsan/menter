@@ -43,6 +43,14 @@ public class UserService implements UserDetailsService { // UserDetailsService�
 		else if ("ROLE_ADMIN".equals(user.getRole())) {
 			System.out.println("講師一覧" + user.getUsername());
 		}
+		//権限と取得してきた役職が生徒の場合
+		if ("ROLE_STUDENT".equals(user.getRole())) {
+			System.out.println("生徒一覧" + user.getUsername());
+			//権限と取得してきた役職が講師の場合
+		} else if ("ROLE_ADMIN".equals(user.getRole())) {
+			System.out.println("講師一覧" + user.getUsername());
+		}
+
 		return new UserPrincipal(user); // ユーザーが見つかった場合、UserPrincipalを作成し返します
 	}
 

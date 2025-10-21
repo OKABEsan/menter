@@ -43,7 +43,7 @@ public class User {
 	@Column(name = "plan")
 	private String plan;
 
+
 	@Column(name = "role")
 	private String role;
-
 }
