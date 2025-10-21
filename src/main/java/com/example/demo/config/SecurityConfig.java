@@ -52,9 +52,11 @@ public class SecurityConfig {
 							//静的リソース(CSS,JS,画像など)は全てアクセス許可
 							.requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
 							.requestMatchers("/style.css").permitAll()
-							.requestMatchers("/js/**","/img/**").permitAll()
+							.requestMatchers("/js/**", "/img/**").permitAll()
 							//"/login"と"/register"はログインしていなくてもアクセスOK
 							.requestMatchers("/login", "register").permitAll()
+							.requestMatchers("/student/**").hasRole("STUDENT")
+							.requestMatchers("/admin/**").hasRole("ADMIN")
 							//それ以外のURLは全て認証(ログイン)済みのユーザーのみアクセス可能
 							.anyRequest().authenticated())
 					//フォームを使ったログイン設定
@@ -70,7 +72,17 @@ public class SecurityConfig {
 							//ログイン失敗時の遷移先
 							.failureUrl("/login?error")
 							//ログイン成功時の遷移先
-							.defaultSuccessUrl("/index")
+							.successHandler((request, response, authentication) -> {
+								//ログイン中のユーザーが持っている認証情報から、その人がどんなロールを持っているか取り出してrole変数に文字として保存
+								String role = authentication.getAuthorities().iterator().next().getAuthority();
+								//ロール名がROLE＿ADMINと同じ場合
+								if (role.equals("ROLE_ADMIN")) {
+									response.sendRedirect("/admin/index");
+									//ロール名がstudentの場合
+								} else {
+									response.sendRedirect("/student/index");
+								}
+							})
 							//ログインページやエラー画面は誰でも見られる
 							.permitAll())
 					//ログアウト用のURL
@@ -81,6 +93,7 @@ public class SecurityConfig {
 							.logoutSuccessUrl("/login?logout")
 							//セッションIDを削除（再利用防止）
 							.deleteCookies("JSESSIONID"));
+
 			//上記で設定した内容を反映し、SecurityFilterCainオブジェクトとして構築
 			return http.build();
 		}

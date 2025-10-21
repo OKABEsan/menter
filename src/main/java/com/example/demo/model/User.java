@@ -41,10 +41,7 @@ public class User {
 
 	@Column(name = "plan")
 	private String plan;
-
-	// 以下は各値を取得するためのメソッド（ゲッター）です。
-	public Integer getId() {
-		return this.id;
-	}
-
+	
+	@Column(name="role")
+	private String role;
 }
