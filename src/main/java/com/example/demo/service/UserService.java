@@ -35,14 +35,6 @@ public class UserService implements UserDetailsService { // UserDetailsService�
 		if (user == null) {
 			throw new UsernameNotFoundException("User not found");
 		}
-		//権限と取得してきた役が生徒だった場合
-		if ("ROLE_USER".equals(user.getRole())) {
-			System.out.println("生徒一覧" + user.getUsername());
-		}
-		//権限と取得してきた役がメンターだった場合
-		else if ("ROLE_ADMIN".equals(user.getRole())) {
-			System.out.println("講師一覧" + user.getUsername());
-		}
 		//権限と取得してきた役職が生徒の場合
 		if ("ROLE_STUDENT".equals(user.getRole())) {
 			System.out.println("生徒一覧" + user.getUsername());

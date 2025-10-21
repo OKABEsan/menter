@@ -57,7 +57,7 @@ public class SecurityConfig {
 							//"/login"と"/register"は誰でもアクセスできる
 							.requestMatchers("/login", "register").permitAll()
 							//USERの人のみアクセスできる
-							.requestMatchers("user/**").hasRole("USER")
+							.requestMatchers("student/**").hasRole("STUDENT")
 							//ADMINの人のみアクセスできる
 							.requestMatchers("admin/**").hasRole("ADMIN")
 
