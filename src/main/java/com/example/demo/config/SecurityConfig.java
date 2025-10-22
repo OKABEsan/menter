@@ -56,15 +56,12 @@ public class SecurityConfig {
 							.requestMatchers("/js/**","/img/**").permitAll()
 							//"/login"と"/register"は誰でもアクセスできる
 							.requestMatchers("/login", "register").permitAll()
-							//USERの人のみアクセスできる
-							.requestMatchers("student/**").hasRole("STUDENT")
-							//ADMINの人のみアクセスできる
-							.requestMatchers("admin/**").hasRole("ADMIN")
-
 							.requestMatchers("/js/**", "/img/**").permitAll()
 							//"/login"と"/register"はログインしていなくてもアクセスOK
 							.requestMatchers("/login", "register").permitAll()
+							//ロール名がSTUDENTのときアクセスできる
 							.requestMatchers("/student/**").hasRole("STUDENT")
+							//ローり名がADMINのときアクセスできる
 							.requestMatchers("/admin/**").hasRole("ADMIN")
 							//それ以外のURLは全て認証(ログイン)済みのユーザーのみアクセス可能
 							.anyRequest().authenticated())
