@@ -50,7 +50,9 @@ public class LoginController {
 			}
 
 		}
-		return null;
+		//そうでなければログインへ移動する
+		return "redirect:/login";
+
 	}
 
 	@GetMapping("/student/index") //URLごとに処理するメソッドを指定する。
