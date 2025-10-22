@@ -72,7 +72,7 @@ public class SecurityConfig {
 							//ログイン失敗時の遷移先
 							.failureUrl("/login?error")
 							//ログイン成功時の遷移先
-							.successHandler((request, response, authentication) -> {
+						.successHandler((request, response, authentication) -> {
 								//ログイン中のユーザーが持っている認証情報から、その人がどんなロールを持っているか取り出してrole変数に文字として保存
 								String role = authentication.getAuthorities().iterator().next().getAuthority();
 								//ロール名がROLE＿ADMINと同じ場合

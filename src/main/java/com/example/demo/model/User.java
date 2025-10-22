@@ -41,7 +41,11 @@ public class User {
 
 	@Column(name = "plan")
 	private String plan;
-	
-	@Column(name="role")
+
+	@Column(name = "role")
 	private String role;
+
+	public String getRole() {
+		return this.role;
+	}
 }
