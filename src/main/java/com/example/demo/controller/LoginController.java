@@ -30,7 +30,7 @@ public class LoginController {
 	@GetMapping("/") //URLと実行するメソッドを結びつけるための仕組み
 	/**
 	 * ログインしているかチェックしてログイン中ならindex、ログインしてなければloginへ移動する。
-	 * @return redirect:/index
+	 * @return redirect:/studentindex,redirect:/adminindex
 	 */
 	public String redirectToIndex() {
 

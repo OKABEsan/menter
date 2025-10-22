@@ -26,6 +26,9 @@ public class UserDto {
 
 	@NotEmpty
 	private String plan;
+	
+	@NotEmpty
+	private String role;
 
 	// 以下は各値を取得するためのメソッド（ゲッター）です。
 	public String getUsername() {
@@ -82,6 +85,12 @@ public class UserDto {
 
 	public void setEmail(String email) {
 		this.email = email; // メールアドレスを設定する
+	}
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role=role;
 	}
 
 }
