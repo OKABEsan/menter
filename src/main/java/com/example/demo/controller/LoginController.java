@@ -35,7 +35,7 @@ public class LoginController {
 	public String redirectToIndex() {
 
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-	
+
 		if (authentication != null && authentication.isAuthenticated()) {
 			//HTMLへ移動する
 			return "redirect:/index";
@@ -47,18 +47,32 @@ public class LoginController {
 
 	}
 
-	@GetMapping("/index") //URLごとに処理するメソッドを指定する。
+	@GetMapping("/student/index") //URLごとに処理するメソッドを指定する。
 
 	/**
 	 * modelにデータを入れる
 	 * @param model
-	 * @return index
+	 * @return studentindex
 	 */
-	public String index(Model model) {
+	public String studentIndex(Model model) {
 
 		//modelにuserデータベース全てを受け渡す
 		model.addAttribute("user", userRepository.findAll());
-		return "index";
+		return "studentindex";
+
+	}
+
+	@GetMapping("/admin/index")
+	/**
+	 * 
+	 * @param model
+	 * @return adminindex
+	 */
+	public String adminIndex(Model model) {
+
+		//modelにuserデータベース全てを受け渡す
+		model.addAttribute("user", userRepository.findAll());
+		return "adminindex";
 
 	}
 
