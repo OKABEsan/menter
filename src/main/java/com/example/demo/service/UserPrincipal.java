@@ -28,7 +28,7 @@ public class UserPrincipal implements UserDetails {
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		//ROLE_GUESTをroleNameへ代入
 		String roleName = "ROLE_GUEST";
-		
+		//もしロール名が"ROLE_"で始まってなかったら
 		if (!roleName.startsWith("ROLE_")) {
 			//getRoleで取得した値が０の場合
 			if ("0".equals(String.valueOf(user.getRole()))) {
