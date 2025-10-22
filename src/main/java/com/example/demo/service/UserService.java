@@ -28,10 +28,12 @@ public class UserService implements UserDetailsService { // UserDetailsService�
 
 	@Override // UserDetailsServiceインターフェースのメソッドを上書きします
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		// ユーザーが見つからない場合、例外をスローします
+		User user = userRepository.findByUsername(username);
 
-		User user = userRepository.findByUsername(username); // ユーザー名でユーザーを検索します
+		// ユーザーが見つからない場合、例外をスローします
 		if (user == null) {
-			throw new UsernameNotFoundException("User not found"); // ユーザーが見つからない場合、例外をスローします
+			throw new UsernameNotFoundException("User not found");
 		}
 		//権限と取得してきた役職が生徒の場合
 		if ("ROLE_STUDENT".equals(user.getRole())) {
@@ -62,6 +64,7 @@ public class UserService implements UserDetailsService { // UserDetailsService�
 		// パスワードをハッシュ化してから保存
 		user.setPassword(passwordEncoder.encode(userDto.getPassword()));
 		user.setEmail(userDto.getEmail());
+		user.setRole(userDto.getRole());
 
 		// データベースへの保存
 		userRepository.save(user); // UserRepositoryを使ってユーザーをデータベースに保存します
