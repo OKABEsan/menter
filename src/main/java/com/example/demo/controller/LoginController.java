@@ -30,15 +30,17 @@ public class LoginController {
 	@GetMapping("/") //URLと実行するメソッドを結びつけるための仕組み
 	/**
 	 * ログインしているかチェックしてログイン中ならindex、ログインしてなければloginへ移動する。
-	 * @return redirect:/index
+	 * @return redirect:/studentindex,redirect:/adminindex
 	 */
 	public String redirectToIndex() {
 
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
+		//ログイン済のユーザーがいるかどうかチェックをする
 		if (authentication != null && authentication.isAuthenticated()) {
+			
+		
 			String role = authentication.getAuthorities().iterator().next().getAuthority();
-			System.out.println("ログイン中のユーザー権限→" + role);
+			System.out.println("ログイン中のユーザー権限→"+role);
 
 			if (role.equals("ROLE_STUDENT")) {
 
@@ -50,6 +52,7 @@ public class LoginController {
 			}
 
 		}
+
 		//そうでなければログインへ移動する
 		return "redirect:/login";
 
@@ -83,5 +86,4 @@ public class LoginController {
 		return "adminindex";
 
 	}
-
 }
