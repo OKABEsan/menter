@@ -37,14 +37,20 @@ public class LoginController {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
 		if (authentication != null && authentication.isAuthenticated()) {
-			//HTMLへ移動する
-			return "redirect:/index";
+			String role = authentication.getAuthorities().iterator().next().getAuthority();
+			System.out.println("ログイン中のユーザー権限→" + role);
+
+			if (role.equals("ROLE_STUDENT")) {
+
+				return "redirect:/student/index";
+
+			} else if (role.equals("ROLE_ADMIN")) {
+
+				return "redirect:/admin/index";
+			}
 
 		}
-
-		//そうでなければログインへ移動する
-		return "redirect:/login";
-
+		return null;
 	}
 
 	@GetMapping("/student/index") //URLごとに処理するメソッドを指定する。
