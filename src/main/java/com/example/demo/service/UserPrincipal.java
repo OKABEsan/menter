@@ -27,7 +27,7 @@ public class UserPrincipal implements UserDetails {
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		//ROLE_GUESTをroleNameへ代入
-		String roleName = "ROLE_GUEST";
+		String roleName=user.getRole();
 		//もしロール名が"ROLE_"で始まってなかったら
 		if (!roleName.startsWith("ROLE_")) {
 			//getRoleで取得した値が０の場合
