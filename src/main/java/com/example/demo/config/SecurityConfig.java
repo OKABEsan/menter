@@ -93,7 +93,6 @@ public class SecurityConfig {
 							.logoutSuccessUrl("/login?logout")
 							//セッションIDを削除（再利用防止）
 							.deleteCookies("JSESSIONID"));
-
 			//上記で設定した内容を反映し、SecurityFilterCainオブジェクトとして構築
 			return http.build();
 		}
