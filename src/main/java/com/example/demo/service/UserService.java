@@ -52,8 +52,8 @@ public class UserService implements UserDetailsService { // UserDetailsService�
 	public User findByUsername(String username) {
 		return userRepository.findByUsername(username); // ユーザー名でユーザーを検索し返します
 	}
-	
-	public List<User>findUserByrole(String role) {
+	//ユーザー一覧からロール名見つけ、新たにメッソドへ追加する
+	public List<User>findByrole(String role) {
 		return userRepository.findByRole(role);
 	}
 

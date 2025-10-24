@@ -86,4 +86,5 @@ public class LoginController {
 		return "adminindex";
 
 	}
+
 }

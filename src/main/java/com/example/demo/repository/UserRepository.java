@@ -20,7 +20,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	 */
 	User findByUsername(String username);
 	/**
-	 * 指定したロールをもつユーザー一覧を取得
+	 * 指定したロールをもつユーザー一覧を見つける
 	 * @param role
 	 * @return
 	 */
