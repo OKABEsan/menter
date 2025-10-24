@@ -1,5 +1,7 @@
 package com.example.demo.service; // このファイルが属するパッケージ（フォルダ）
 
+import java.util.List;
+
 // 必要なクラスをインポートします
 import jakarta.transaction.Transactional;
 
@@ -49,6 +51,10 @@ public class UserService implements UserDetailsService { // UserDetailsService�
 	//新たにメソッドを追加します
 	public User findByUsername(String username) {
 		return userRepository.findByUsername(username); // ユーザー名でユーザーを検索し返します
+	}
+	
+	public List<User>findUserByrole(String role) {
+		return userRepository.findByRole(role);
 	}
 
 	@Transactional // トランザクションを開始します。メソッドが終了したらトランザクションがコミットされます。
