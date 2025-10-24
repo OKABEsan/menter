@@ -67,8 +67,8 @@ public class LoginController {
 	 */
 	public String studentIndex(Model model) {
 
-		//modelにuserデータベース全てを受け渡す
-		model.addAttribute("user", userRepository.findAll());
+		//modelにuserデータベースからみつけたstudentロールを渡す
+		model.addAttribute("user", userRepository.findByRole("ROLE_STUDENT"));
 		return "studentindex";
 
 	}
@@ -81,8 +81,8 @@ public class LoginController {
 	 */
 	public String adminIndex(Model model) {
 
-		//modelにuserデータベース全てを受け渡す
-		model.addAttribute("user", userRepository.findAll());
+		//modelにuserデータベースから見つけたadminロールを渡す
+		model.addAttribute("user", userRepository.findByRole("ROLE_ADMIN"));
 		return "adminindex";
 
 	}
