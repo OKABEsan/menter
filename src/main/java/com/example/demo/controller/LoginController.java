@@ -33,14 +33,13 @@ public class LoginController {
 	 * @return redirect:/studentindex,redirect:/adminindex
 	 */
 	public String redirectToIndex() {
-
+		//今ログインしている状態のユーザー認証情報を取得する
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		//ログイン済のユーザーがいるかどうかチェックをする
 		if (authentication != null && authentication.isAuthenticated()) {
-			
-		
+
 			String role = authentication.getAuthorities().iterator().next().getAuthority();
-			System.out.println("ログイン中のユーザー権限→"+role);
+			System.out.println("ログイン中のユーザー権限→" + role);
 
 			if (role.equals("ROLE_STUDENT")) {
 
