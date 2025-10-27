@@ -49,6 +49,16 @@ public class RegisterController {
 			System.out.println("既存ユーザー情報あり：" + existing);
 			return "register"; // ユーザーが存在するため、再度登録画面を表示します
 		}
+		//1を入力した場合
+		if("1".equals(String.valueOf(userDto.getRole()))){
+			//ROLE_ADMINを保持する
+			userDto.setRole("ROLE_ADMIN");
+			//それ以外の場合ROLE_STUDENT
+		}else {
+			//ROLE_STUDENTを保持する
+			userDto.setRole("ROLE_STUDENT");
+		}
+	
 		userService.save(userDto); // ユーザーが存在しない場合、新しいユーザーを保存します
 		return "login"; // 登録が成功した場合、ログイン画面を表示します
 	}

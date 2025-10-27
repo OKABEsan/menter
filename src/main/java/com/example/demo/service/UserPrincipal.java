@@ -26,9 +26,21 @@ public class UserPrincipal implements UserDetails {
 	// ユーザーに与えられる権限を返します。ここでは全てのユーザーに"USER"という権限を与えています。
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return Collections.singleton(new SimpleGrantedAuthority("USER"));
+		//ROLE_GUESTをroleNameへ代入
+		String roleName=user.getRole();
+		//もしロール名が"ROLE_"で始まってなかったら
+		if (!roleName.startsWith("ROLE_")) {
+			//getRoleで取得した値が０の場合
+			if ("0".equals(String.valueOf(user.getRole()))) {
+				roleName = "ROLE_STUDENT";
+				//getRoleで取得した値が1の場合
+			} else if ("1".equals(String.valueOf(user.getRole()))) {
+				roleName = "ROLE_ADMIN";
+			}
+		}
+		//ユーザーの持っているロールを集めて返す
+		return Collections.singleton(new SimpleGrantedAuthority(roleName));
 	}
-
 	// Userオブジェクトのパスワードを返します。
 	@Override
 	public String getPassword() {

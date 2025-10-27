@@ -1,5 +1,7 @@
 package com.example.demo.service; // このファイルが属するパッケージ（フォルダ）
 
+import java.util.List;
+
 // 必要なクラスをインポートします
 import jakarta.transaction.Transactional;
 
@@ -28,10 +30,12 @@ public class UserService implements UserDetailsService { // UserDetailsService�
 
 	@Override // UserDetailsServiceインターフェースのメソッドを上書きします
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		// ユーザーが見つからない場合、例外をスローします
+		User user = userRepository.findByUsername(username);
 
-		User user = userRepository.findByUsername(username); // ユーザー名でユーザーを検索します
+		// ユーザーが見つからない場合、例外をスローします
 		if (user == null) {
-			throw new UsernameNotFoundException("User not found"); // ユーザーが見つからない場合、例外をスローします
+			throw new UsernameNotFoundException("User not found");
 		}
 		//権限と取得してきた役職が生徒の場合
 		if ("ROLE_STUDENT".equals(user.getRole())) {
@@ -48,6 +52,10 @@ public class UserService implements UserDetailsService { // UserDetailsService�
 	public User findByUsername(String username) {
 		return userRepository.findByUsername(username); // ユーザー名でユーザーを検索し返します
 	}
+	//ユーザー一覧からロール名見つけ、新たにメッソドへ追加する
+	public List<User>findByrole(String role) {
+		return userRepository.findByRole(role);
+	}
 
 	@Transactional // トランザクションを開始します。メソッドが終了したらトランザクションがコミットされます。
 	public void save(UserDto userDto) {
@@ -62,6 +70,7 @@ public class UserService implements UserDetailsService { // UserDetailsService�
 		// パスワードをハッシュ化してから保存
 		user.setPassword(passwordEncoder.encode(userDto.getPassword()));
 		user.setEmail(userDto.getEmail());
+		user.setRole(userDto.getRole());
 
 		// データベースへの保存
 		userRepository.save(user); // UserRepositoryを使ってユーザーをデータベースに保存します
