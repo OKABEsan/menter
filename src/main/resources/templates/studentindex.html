@@ -24,17 +24,19 @@
 		<th>TEL</th>
 		<th>プラン名</th>
 	</tr>
-	 <tr th:each="user:${user}">
+	 <tr th:each="user:${user}"></td>
 		<td th:text="${user.username}"></td>
 		<td th:text="${user.age}"></td>
 		<td th:text="${user.birthday}"></td>
 		<td th:text="${user.email}"></td>
 		<td th:text="${user.tel}"></td>
 		<td th:text="${user.plan}"></td>
-		<td>
-			<button class="edit-btn">編集</button>
+		<td>	
+			<form th:action="@{/student/edit/{id}(id=${user.id})}" method="get"style="display:inline;">
+				<button type="submit"class="delete-btn">編集</button>
+				</form>
 			<button class="delete-btn">削除</button>
-			</td>
+		</td>
 	</tr>
 </table>
 		</div>
