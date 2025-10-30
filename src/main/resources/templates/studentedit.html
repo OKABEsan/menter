@@ -5,6 +5,23 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<h1>登録内容編集画面</h1>
+<form th:action="@{/student/update}"method="post">
+	<input type="hidden"name="id"th:value="${user.id}"/>
+	<label>名前</label>
+	<input type="text"name="username"th:value="${user.username}"/>
+	<label>年齢</labele>
+	<input type="number"name="age"th:value="${user.age}"/>
+	<label>生年月日</label>
+	<input type="text"name="birthday"th:value="${user.birthday}"/>
+	<label>email</label>
+	<input type="text"name="email"th:value="${user.email}"/>
+	<label>TEL</label>
+	<input type="text"name="tel"th:value="${user.tel}"/>
+	<label>プラン名</label>
+	<select name="plan"th:filed="*{plan}">
+		<option value ="planSelect">---</option>
+			<option value ="STANDARD">STANDARD</option>
+			<option value ="PREMIUN">PREMIUM</option>
 </body>
 </html>

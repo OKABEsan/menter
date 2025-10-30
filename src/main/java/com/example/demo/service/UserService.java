@@ -48,13 +48,31 @@ public class UserService implements UserDetailsService { // UserDetailsService�
 		return new UserPrincipal(user); // ユーザーが見つかった場合、UserPrincipalを作成し返します
 	}
 
-	//新たにメソッドを追加します
+	/**
+	 * 	//新たにメソッドを追加します
+	 * @param username
+	 * @return
+	 */
 	public User findByUsername(String username) {
 		return userRepository.findByUsername(username); // ユーザー名でユーザーを検索し返します
 	}
-	//ユーザー一覧からロール名見つけ、新たにメッソドへ追加する
-	public List<User>findByrole(String role) {
+
+	/**
+	 * //ユーザー一覧からロール名見つけ、新たにメソッドへ追加する
+	 * @param role
+	 * @return
+	 */
+	public List<User> findByrole(String role) {
 		return userRepository.findByRole(role);
+	}
+
+	/**
+	 * ユーザー一覧からIDを見つけ、中身があれば、新たにメソッドへ追加する
+	 * @param id
+	 * @return
+	 */
+	public User  findById(Integer id) {
+		return userRepository.findById(id).orElse(null);
 	}
 
 	@Transactional // トランザクションを開始します。メソッドが終了したらトランザクションがコミットされます。
