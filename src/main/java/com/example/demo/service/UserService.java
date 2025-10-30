@@ -71,7 +71,7 @@ public class UserService implements UserDetailsService { // UserDetailsServiceã‚
 	 * @param id
 	 * @return
 	 */
-	public User  findById(Integer id) {
+	public User findById(Integer id) {
 		return userRepository.findById(id).orElse(null);
 	}
 
