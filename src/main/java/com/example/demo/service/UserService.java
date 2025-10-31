@@ -1,5 +1,7 @@
 package com.example.demo.service; // このファイルが属するパッケージ（フォルダ）
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.*;
+
 import java.util.List;
 
 // 必要なクラスをインポートします
@@ -51,7 +53,7 @@ public class UserService implements UserDetailsService { // UserDetailsService�
 	/**
 	 * 	//新たにメソッドを追加します
 	 * @param username
-	 * @return
+	 * @return userRepository.findByUsername(username);
 	 */
 	public User findByUsername(String username) {
 		return userRepository.findByUsername(username); // ユーザー名でユーザーを検索し返します
@@ -60,7 +62,7 @@ public class UserService implements UserDetailsService { // UserDetailsService�
 	/**
 	 * //ユーザー一覧からロール名見つけ、新たにメソッドへ追加する
 	 * @param role
-	 * @return
+	 * @return userRepository.findByRole(role);
 	 */
 	public List<User> findByrole(String role) {
 		return userRepository.findByRole(role);
@@ -74,9 +76,12 @@ public class UserService implements UserDetailsService { // UserDetailsService�
 	public User findById(Integer id) {
 		return userRepository.findById(id).orElse(null);
 	}
-
-	@Transactional // トランザクションを開始します。メソッドが終了したらトランザクションがコミットされます。
-	public void save(UserDto userDto) {
+/**
+ * //データベース処理を一つの処理としてまとめる(新規登録）
+ * @param userDto
+ */
+	@Transactional
+	public void register(UserDto userDto) {
 
 		// UserDtoからUserへの変換
 		User user = new User();
@@ -89,8 +94,18 @@ public class UserService implements UserDetailsService { // UserDetailsService�
 		user.setPassword(passwordEncoder.encode(userDto.getPassword()));
 		user.setEmail(userDto.getEmail());
 		user.setRole(userDto.getRole());
+	
 
 		// データベースへの保存
 		userRepository.save(user); // UserRepositoryを使ってユーザーをデータベースに保存します
+	}
+	/**
+	 * /データベース処理を一つの処理としてまとめる(更新）
+	 * @param userDto
+	 */
+	@Transactional
+	public void save(UserDto userDto) {
+		userRepository.save(user); // UserRepositoryを使ってユーザーをデータベースに保存します
+	
 	}
 }

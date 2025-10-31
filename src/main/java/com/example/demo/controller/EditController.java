@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.example.demo.model.User;
 import com.example.demo.model.UserDto;
 import com.example.demo.service.UserService;
 
@@ -19,7 +20,6 @@ public class EditController {
 	//自動でUserserviceクラスの変数を追加
 	@Autowired
 	private UserService userService;
-	
 
 	@GetMapping("/student/edit/{id}")
 	/**
@@ -34,12 +34,25 @@ public class EditController {
 
 		return "studentedit";
 	}
+
+	//データを保存するリクエストを送る
 	@PostMapping("/student/save")
-	
+	/**
+	 * フォームのデータを保存するメソッド
+	 * @param userDto
+	 * @return　redirect:/studentindex
+	 */
 	public String saveUser(@ModelAttribute UserDto userDto) {
-		return "studentedit";
-		
+		//フォームから受け取った名前を見つけて変数existingへ代入
+		User existing = userService.findByUsername(userDto.getUsername());
+		//名前があれば
+		if (existing != null) {
+			System.out.println("既存ユーザー情報あり：" + existing);
+			//名前がなければフォームのデータを保存する
+		} else {
+			userService.save(userDto);
+		}
+		return "redirect:/student/index";
 	}
-	
 
 }
