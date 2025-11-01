@@ -59,7 +59,7 @@ public class RegisterController {
 			userDto.setRole("ROLE_STUDENT");
 		}
 	
-		userService.save(userDto); // ユーザーが存在しない場合、新しいユーザーを保存します
+		userService.register(userDto); // ユーザーが存在しない場合、新しいユーザーを保存します
 		return "login"; // 登録が成功した場合、ログイン画面を表示します
 	}
 }

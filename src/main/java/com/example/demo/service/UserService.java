@@ -1,7 +1,5 @@
 package com.example.demo.service; // このファイルが属するパッケージ（フォルダ）
 
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.*;
-
 import java.util.List;
 
 // 必要なクラスをインポートします
@@ -11,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -76,10 +75,11 @@ public class UserService implements UserDetailsService { // UserDetailsService�
 	public User findById(Integer id) {
 		return userRepository.findById(id).orElse(null);
 	}
-/**
- * //データベース処理を一つの処理としてまとめる(新規登録）
- * @param userDto
- */
+
+	/**
+	 * //データベース処理を一つの処理としてまとめる(新規登録）
+	 * @param userDto
+	 */
 	@Transactional
 	public void register(UserDto userDto) {
 
@@ -94,18 +94,36 @@ public class UserService implements UserDetailsService { // UserDetailsService�
 		user.setPassword(passwordEncoder.encode(userDto.getPassword()));
 		user.setEmail(userDto.getEmail());
 		user.setRole(userDto.getRole());
-	
 
 		// データベースへの保存
 		userRepository.save(user); // UserRepositoryを使ってユーザーをデータベースに保存します
 	}
+
 	/**
 	 * /データベース処理を一つの処理としてまとめる(更新）
 	 * @param userDto
 	 */
 	@Transactional
 	public void save(UserDto userDto) {
+		//データベースからDtoのIDを見つけて取り出し変数userへ代入する
+		User user = userRepository.findById(userDto.getId()).get();
+		user.setUsername(userDto.getUsername());
+		user.setAge(userDto.getAge());
+		user.setBirthday(userDto.getBirthday());
+		user.setTel(userDto.getTel());
+		user.setPlan(userDto.getPlan());
+		user.setEmail(userDto.getEmail());
+		user.setRole(userDto.getRole());
+		//パスワードが存在していてかつDtoで取得したパスワードが空文字でない場合
+		if (userDto.getPassword() != null && !userDto.getPassword().isEmpty()) {
+			//BCrypt方式を変数passWordEncoderへ代入
+			PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+			//ユーザーIDにDtoのパスワードをそのまま設定する
+			user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+		}
 		userRepository.save(user); // UserRepositoryを使ってユーザーをデータベースに保存します
-	
+
 	}
+
+
 }

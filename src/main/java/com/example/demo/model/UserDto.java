@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotEmpty;
  * ユーザーのデータを一時的に保持し受け渡しをするクラス
  */
 public class UserDto {
+	private Integer id;
 	@NotEmpty // ユーザー名は空であってはならないというルール
 	private String username; // ユーザー名を保存するための場所
 
@@ -26,11 +27,19 @@ public class UserDto {
 
 	@NotEmpty
 	private String plan;
-	
+
 	@NotEmpty
 	private String role;
 
 	// 以下は各値を取得するためのメソッド（ゲッター）です。
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	public String getUsername() {
 		return username; // ユーザー名を返す
 	}
@@ -86,11 +95,13 @@ public class UserDto {
 	public void setEmail(String email) {
 		this.email = email; // メールアドレスを設定する
 	}
+
 	public String getRole() {
 		return role;
 	}
+
 	public void setRole(String role) {
-		this.role=role;
+		this.role = role;
 	}
 
 }

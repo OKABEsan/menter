@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.example.demo.model.User;
 import com.example.demo.model.UserDto;
 import com.example.demo.service.UserService;
 
@@ -43,15 +42,8 @@ public class EditController {
 	 * @return　redirect:/studentindex
 	 */
 	public String saveUser(@ModelAttribute UserDto userDto) {
-		//フォームから受け取った名前を見つけて変数existingへ代入
-		User existing = userService.findByUsername(userDto.getUsername());
-		//名前があれば
-		if (existing != null) {
-			System.out.println("既存ユーザー情報あり：" + existing);
-			//名前がなければフォームのデータを保存する
-		} else {
-			userService.save(userDto);
-		}
+	userService.save(userDto);
+
 		return "redirect:/student/index";
 	}
 

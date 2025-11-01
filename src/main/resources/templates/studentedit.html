@@ -7,17 +7,17 @@
 <body>
 <h1>登録内容編集画面</h1>
 <form th:action="@{/student/save}" th:object="${user}" method="post">
-	<input type="hidden"name="id"th:value="${user.id}"/>
+	<input type="hidden"name="id"th:field="*{id}"/>
 	<label>名前</label>
-	<input type="text"name="username"th:value="${user.username}"/>
+	<input type="text"name="username"th:field="*{username}"/>
 	<label>年齢</labele>
-	<input type="number"name="age"th:value="${user.age}"/>
+	<input type="number"name="age"th:field="*{age}"/>
 	<label>生年月日</label>
-	<input type="text"name="birthday"th:value="${user.birthday}"/>
+	<input type="text"name="birthday"th:field="*{birthday}"/>
 	<label>email</label>
-	<input type="text"name="email"th:value="${user.email}"/>
+	<input type="text"name="email"th:field="*{email}"/>
 	<label>TEL</label>
-	<input type="text"name="tel"th:value="${user.tel}"/>
+	<input type="text"name="tel"th:field="*{tel}"/>
 	</br>
 	<label>プラン名</label>
 	<select th:field="*{plan}">
