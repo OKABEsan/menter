@@ -42,7 +42,7 @@ public class EditController {
 	 * @return　redirect:/studentindex
 	 */
 	public String saveUser(@ModelAttribute UserDto userDto) {
-	userService.save(userDto);
+		userService.save(userDto);
 
 		return "redirect:/student/index";
 	}

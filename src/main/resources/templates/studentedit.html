@@ -7,17 +7,17 @@
 <body>
 <h1>登録内容編集画面</h1>
 <form th:action="@{/student/save}" th:object="${user}" method="post">
-	<input type="hidden"name="id"th:field="*{id}"/>
+	<input type="hidden"th:field="*{id}"/>
 	<label>名前</label>
-	<input type="text"name="username"th:field="*{username}"/>
+	<input type="text"th:field="*{username}"/>
 	<label>年齢</labele>
-	<input type="number"name="age"th:field="*{age}"/>
+	<input type="number"th:field="*{age}"/>
 	<label>生年月日</label>
-	<input type="text"name="birthday"th:field="*{birthday}"/>
+	<input type="text"th:field="*{birthday}"/>
 	<label>email</label>
-	<input type="text"name="email"th:field="*{email}"/>
+	<input type="text"th:field="*{email}"/>
 	<label>TEL</label>
-	<input type="text"name="tel"th:field="*{tel}"/>
+	<input type="text"th:field="*{tel}"/>
 	</br>
 	<label>プラン名</label>
 	<select th:field="*{plan}">
@@ -26,6 +26,7 @@
 			<option value ="PREMIUN">PREMIUM</option>
 			</select>
 			</br>
+	<input type="hidden"th:field="*{role}"/>
 	<button type="submit">+ 内容を変更する</button>
 </form>
 </body>
