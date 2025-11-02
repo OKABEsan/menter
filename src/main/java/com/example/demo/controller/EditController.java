@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.model.UserDto;
 import com.example.demo.service.UserService;
@@ -41,10 +42,18 @@ public class EditController {
 	 * @param userDto
 	 * @return　redirect:/studentindex
 	 */
-	public String saveUser(@ModelAttribute UserDto userDto) {
-		userService.save(userDto);
+	public String saveUser(@ModelAttribute UserDto userDto, RedirectAttributes redirectAttributes) {
+		try {
+			userService.save(userDto);
+			redirectAttributes.addFlashAttribute("successMessage", "生徒情報を更新しました");
 
+			//例外処理
+		} catch (Exception e) {
+			redirectAttributes.addFlashAttribute("errorMessage", "生徒情報を更新できませんでした。");
+			//発生したエラーの場所と種類をコンソール二表示
+			e.printStackTrace();
+
+		}
 		return "redirect:/student/index";
 	}
-
 }
