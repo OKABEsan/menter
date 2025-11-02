@@ -50,7 +50,7 @@ public class EditController {
 			//例外処理
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("errorMessage", "生徒情報を更新できませんでした。");
-			//発生したエラーの場所と種類をコンソール二表示
+			//発生したエラーの場所と種類をコンソールに表示
 			e.printStackTrace();
 
 		}
