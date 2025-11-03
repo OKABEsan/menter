@@ -10,14 +10,19 @@
 	<input type="hidden"th:field="*{id}"/>
 	<label>名前</label>
 	<input type="text"th:field="*{username}"/>
+	<p th:if="${#fields.hasErrors('username')}"th:errors="*{username}"style="color:red"></p>
 	<label>年齢</labele>
 	<input type="number"th:field="*{age}"/>
+	<p th:if="${#fields.hasErrors('age')}"th:errors="*{age}" min="0"style="color:red"></p>
 	<label>生年月日</label>
 	<input type="text"th:field="*{birthday}"/>
+	<p th:if="${#fields.hasErrors('birthday')}"th:errors="*{birthday}"style="color:red"></p>
 	<label>email</label>
 	<input type="text"th:field="*{email}"/>
+	<p th:if="${#fields.hasErrors('email')}"th:errors="*{email}"style="color:red"></p>
 	<label>TEL</label>
 	<input type="text"th:field="*{tel}"/>
+	<p th:if="${#fields.hasErrors('tel')}"th:errors="*{tel}"style="color:red"></p>>
 	</br>
 	<label>プラン名</label>
 	<select th:field="*{plan}">
@@ -25,6 +30,7 @@
 			<option value ="STANDARD">STANDARD</option>
 			<option value ="PREMIUN">PREMIUM</option>
 	</select>
+	<p th:if="${#fields.hasErrors('plan')}"th:errors="*{}plan"style="color:red"></p>
 			</br>
 	<input type="hidden"th:field="*{role}"/>
 	<button type="submit">+ 内容を変更する</button>
