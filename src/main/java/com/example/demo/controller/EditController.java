@@ -1,8 +1,11 @@
 package com.example.demo.controller;
 
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,10 +45,24 @@ public class EditController {
 	 * @param userDto
 	 * @return　redirect:/studentindex
 	 */
-	public String saveUser(@ModelAttribute UserDto userDto, RedirectAttributes redirectAttributes) {
+	public String saveUser(@Valid @ModelAttribute UserDto userDto, BindingResult bindingResult,
+			RedirectAttributes redirectAttributes, Model model) {
+		//フォームにエラーがある場合
+
 		try {
-			userService.save(userDto);
-			redirectAttributes.addFlashAttribute("successMessage", "生徒情報を更新しました");
+			if (bindingResult.hasErrors()) {
+				System.out.println("システムエラー");
+				bindingResult.getAllErrors().forEach(e->System.out.println("エラー内容"+e.getDefaultMessage()));
+				model.addAttribute("user", userDto);
+				//生徒編集画面に留まる
+				return "studentedit";
+				//フォームにエラーがない場合	
+			} else {
+
+				//渡してきたデータを保存する
+				userService.save(userDto);
+				redirectAttributes.addFlashAttribute("successMessage", "生徒情報を更新しました");
+			}
 
 			//例外処理
 		} catch (Exception e) {
@@ -56,4 +73,5 @@ public class EditController {
 		}
 		return "redirect:/student/index";
 	}
+
 }

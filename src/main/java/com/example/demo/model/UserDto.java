@@ -18,11 +18,10 @@ public class UserDto {
 	@Min(value = 0, message = "年齢は0歳以上で入力してください")
 	private Integer age;
 
-	@NotBlank(message="生年月日は必須です")
-	@Pattern(regexp="^\\d{4}/\\d{2}/\\d{2}$",message="生年月日は0000/00/00の型式で入力してください")
+	@NotBlank(message = "生年月日は必須です")
+	@Pattern(regexp = "^\\d{4}/\\d{2}/\\d{2}$", message = "生年月日は0000/00/00の型式で入力してください")
 	private String birthday;
 
-	@NotEmpty // パスワードは空であってはならないというルール
 	private String password; // パスワードを保存するための場所
 
 	@NotBlank(message = "メールアドレスは必須です")

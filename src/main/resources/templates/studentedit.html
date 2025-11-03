@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>登録内容編集画面</h1>
-<form th:action="@{/student/save}" th:object="${user}" method="post">
+<form th:action="@{/student/save}"th:object="${user}" method="post">
 	<input type="hidden"th:field="*{id}"/>
 	<label>名前</label>
 	<input type="text"th:field="*{username}"/>
@@ -21,10 +21,10 @@
 	</br>
 	<label>プラン名</label>
 	<select th:field="*{plan}">
-		<option value ="planSelect">---</option>
+		<option value ="PLANSELECT">---</option>
 			<option value ="STANDARD">STANDARD</option>
 			<option value ="PREMIUN">PREMIUM</option>
-			</select>
+	</select>
 			</br>
 	<input type="hidden"th:field="*{role}"/>
 	<button type="submit">+ 内容を変更する</button>
