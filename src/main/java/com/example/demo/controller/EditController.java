@@ -37,7 +37,7 @@ public class EditController {
 
 		return "studentedit";
 	}
-
+	
 	//データを保存するリクエストを送る
 	@PostMapping("/student/save")
 	/**
