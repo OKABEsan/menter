@@ -45,14 +45,14 @@ public class EditController {
 	 * @param userDto
 	 * @return　redirect:/studentindex
 	 */
-	public String saveUser(@Valid @ModelAttribute UserDto userDto, BindingResult bindingResult,
+	public String saveUser(@Valid @ModelAttribute("user") UserDto userDto, BindingResult bindingResult,
 			RedirectAttributes redirectAttributes, Model model) {
 		//フォームにエラーがある場合
 
 		try {
 			if (bindingResult.hasErrors()) {
-				System.out.println("システムエラー");
-				bindingResult.getAllErrors().forEach(e->System.out.println("エラー内容"+e.getDefaultMessage()));
+				//エラー内容の表示
+				bindingResult.getAllErrors().forEach(e -> System.out.println("エラー内容" + e.getDefaultMessage()));
 				model.addAttribute("user", userDto);
 				//生徒編集画面に留まる
 				return "studentedit";
@@ -66,9 +66,10 @@ public class EditController {
 
 			//例外処理
 		} catch (Exception e) {
-			redirectAttributes.addFlashAttribute("errorMessage", "生徒情報を更新できませんでした。");
+			model.addAttribute("errorMessage", "生徒情報を更新できませんでした。");
 			//発生したエラーの場所と種類をコンソールに表示
 			e.printStackTrace();
+			return "studenteditt";
 
 		}
 		return "redirect:/student/index";
