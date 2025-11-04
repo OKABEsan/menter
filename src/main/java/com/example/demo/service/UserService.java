@@ -17,10 +17,10 @@ import com.example.demo.model.User;
 import com.example.demo.model.UserDto;
 import com.example.demo.repository.UserRepository;
 
-@Service // ServiceクラスだよとSpringnに教える
 /**
  * 画面とデータベースの間でデータを橋渡しするクラス
  */
+@Service // ServiceクラスだよとSpringnに教える
 public class UserService implements UserDetailsService { // UserDetailsServiceインターフェースを実装しています
 
 	@Autowired // Springが自動的にUserRepositoryの実装を注入します
@@ -68,12 +68,22 @@ public class UserService implements UserDetailsService { // UserDetailsService�
 	}
 
 	/**
-	 * ユーザー一覧からIDを見つけ、中身があれば、新たにメソッドへ追加する
+	 * ユーザ一覧からIDを見つけ、中身があれば、Repositoryへ渡す
 	 * @param id
-	 * @return
+	 * @return　userRepository.findById(id).orElse(null);
 	 */
 	public User findById(Integer id) {
 		return userRepository.findById(id).orElse(null);
+	}
+
+	/**
+	 * 生徒一覧から情報を見つけてロックをかけて取り出し、中身があればRepositoryへ渡す
+	 * @param id
+	 * @return userRepository.findByIdWithLock(id).orElse(null);
+	 */
+	@Transactional
+	public User findByIdWithLock(Integer id) {
+		return userRepository.findByIdWithLock(id).orElse(null);
 	}
 
 	/**
@@ -124,6 +134,4 @@ public class UserService implements UserDetailsService { // UserDetailsService�
 		userRepository.save(user); // UserRepositoryを使ってユーザーをデータベースに保存します
 
 	}
-
-
 }
