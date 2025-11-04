@@ -54,6 +54,7 @@ public class EditController {
 				//エラー内容の表示
 				bindingResult.getAllErrors().forEach(e -> System.out.println("エラー内容" + e.getDefaultMessage()));
 				model.addAttribute("user", userDto);
+				model.addAttribute("errorMessage", "生徒情報を更新できませんでした。");
 				//生徒編集画面に留まる
 				return "studentedit";
 				//フォームにエラーがない場合	
