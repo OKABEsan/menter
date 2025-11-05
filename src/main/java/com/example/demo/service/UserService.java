@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -16,10 +17,10 @@ import com.example.demo.model.User;
 import com.example.demo.model.UserDto;
 import com.example.demo.repository.UserRepository;
 
-@Service // ServiceクラスだよとSpringnに教える
 /**
  * 画面とデータベースの間でデータを橋渡しするクラス
  */
+@Service // ServiceクラスだよとSpringnに教える
 public class UserService implements UserDetailsService { // UserDetailsServiceインターフェースを実装しています
 
 	@Autowired // Springが自動的にUserRepositoryの実装を注入します
@@ -48,17 +49,49 @@ public class UserService implements UserDetailsService { // UserDetailsService�
 		return new UserPrincipal(user); // ユーザーが見つかった場合、UserPrincipalを作成し返します
 	}
 
-	//新たにメソッドを追加します
+	/**
+	 * 	//新たにメソッドを追加します
+	 * @param username
+	 * @return userRepository.findByUsername(username);
+	 */
 	public User findByUsername(String username) {
 		return userRepository.findByUsername(username); // ユーザー名でユーザーを検索し返します
 	}
-	//ユーザー一覧からロール名見つけ、新たにメッソドへ追加する
-	public List<User>findByrole(String role) {
+
+	/**
+	 * //ユーザー一覧からロール名見つけ、新たにメソッドへ追加する
+	 * @param role
+	 * @return userRepository.findByRole(role);
+	 */
+	public List<User> findByrole(String role) {
 		return userRepository.findByRole(role);
 	}
 
-	@Transactional // トランザクションを開始します。メソッドが終了したらトランザクションがコミットされます。
-	public void save(UserDto userDto) {
+	/**
+	 * ユーザ一覧からIDを見つけ、中身があれば、Repositoryへ渡す
+	 * @param id
+	 * @return　userRepository.findById(id).orElse(null);
+	 */
+	public User findById(Integer id) {
+		return userRepository.findById(id).orElse(null);
+	}
+
+	/**
+	 * 生徒一覧から情報を見つけてロックをかけて取り出し、中身があればRepositoryへ渡す
+	 * @param id
+	 * @return userRepository.findByIdWithLock(id).orElse(null);
+	 */
+	@Transactional
+	public User findByIdWithLock(Integer id) {
+		return userRepository.findByIdWithLock(id).orElse(null);
+	}
+
+	/**
+	 * //データベース処理を一つの処理としてまとめる(新規登録）
+	 * @param userDto
+	 */
+	@Transactional
+	public void register(UserDto userDto) {
 
 		// UserDtoからUserへの変換
 		User user = new User();
@@ -75,4 +108,31 @@ public class UserService implements UserDetailsService { // UserDetailsService�
 		// データベースへの保存
 		userRepository.save(user); // UserRepositoryを使ってユーザーをデータベースに保存します
 	}
+
+	/**
+	 * /データベース処理を一つの処理としてまとめる(更新）
+	 * @param userDto
+	 */
+	@Transactional
+	public void save(UserDto userDto) {
+		//データベースからDtoのIDを見つけて取り出し変数userへ代入する
+		User user = userRepository.findById(userDto.getId()).get();
+		user.setUsername(userDto.getUsername());
+		user.setAge(userDto.getAge());
+		user.setBirthday(userDto.getBirthday());
+		user.setTel(userDto.getTel());
+		user.setPlan(userDto.getPlan());
+		user.setEmail(userDto.getEmail());
+		user.setRole(userDto.getRole());
+		//パスワードが存在していてかつDtoで取得したパスワードが空文字でない場合
+		if (userDto.getPassword() != null && !userDto.getPassword().isEmpty()) {
+			//BCrypt方式を変数passWordEncoderへ代入
+			PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+			//ユーザーIDにDtoのパスワードをそのまま設定する
+			user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+		}
+		userRepository.save(user); // UserRepositoryを使ってユーザーをデータベースに保存します
+
+	}
+
 }

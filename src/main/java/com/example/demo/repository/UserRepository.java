@@ -1,9 +1,15 @@
 package com.example.demo.repository;
 
 import java.util.List;
+import java.util.Optional;
 
-//必要なツールをインポートしています
+import jakarta.persistence.LockModeType;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Lock;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 //Userクラスを使うためにインポートしています
 import com.example.demo.model.User;
@@ -11,7 +17,20 @@ import com.example.demo.model.User;
 /**
  * データベース操作を行うクラス。保存、更新、削除、検索
  */
+@Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
+	//悲観ロックをかける
+	@Lock(LockModeType.PESSIMISTIC_WRITE)
+	//JPQLでの命令。生徒1人を選択し生徒一覧から情報を取り出す
+	@Query("SELECT u FROM User u WHERE u.id=:id")
+	//情報を見つけ、情報があれば情報にロックをかける
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
+	Optional<User> findByIdWithLock(@Param("id") Integer id);
+
 	/**
 	 * 
 	 * @param username
@@ -19,10 +38,12 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	 * ユーザーネームの文字を見つける
 	 */
 	User findByUsername(String username);
+
 	/**
 	 * 指定したロールをもつユーザー一覧を見つける
 	 * @param role
 	 * @return
 	 */
-	List<User>findByRole(String role);
+	List<User> findByRole(String role);
+
 }
