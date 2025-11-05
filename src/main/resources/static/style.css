@@ -35,4 +35,13 @@ body{
 	    border-bottom:2px solid #dee2e6;
 		border-left:none;
 		border-right:none;
-		]
+		
+		}
+	
+	.modal-overlay{
+		display:none;
+		
+	}
+	.modal-overlay.present{
+		display:block
+	}

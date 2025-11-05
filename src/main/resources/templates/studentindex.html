@@ -41,14 +41,28 @@
 		<td th:text="${user.plan}"></td>
 		<td>	
 			<form th:action="@{/student/edit/{id}(id=${user.id})}" method="get"style="display:inline;">
-				<button type="submit"class="delete-btn">編集</button>
+				<button type="submit"class="edit-btn">編集</button>
 				</form>
-			<button class="delete-btn">削除</button>
+			<!--削除ボタンを押すとモーダルが出る-->	
+			<button type="submit" class="delete-btn">削除</button>
+			<div id="confirmmodal"class="modal-overlay">
+			  <div class=modal-content>
+				<p>本当に削除しますか？</p>
+				<!--キャンセルで一覧に戻る-->	 
+			    <button type="button" class="modal-cancel">キャンセル</button>
+				</form>
+				<!---OKを押すと削除処理-->
+				<form th:action="@{/student/delete/{id}(id=${user.id})}"method="post"style="sisplay inline;">
+			    <button type="button" class="modal-okay">OK</button>
+			   </form>
+			 </div>
+			</div>
 		</td>
 	</tr>
 </table>
 		</div>
 		</div>
 		</div>
+		<script th:src="@{/deletemodal.js}"></script>
 </body>
 </html>
