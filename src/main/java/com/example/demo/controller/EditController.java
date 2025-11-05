@@ -41,7 +41,8 @@ public class EditController {
 	//データを保存するリクエストを送る
 	@PostMapping("/student/save")
 	/**
-	 * フォームのデータを保存するメソッド
+	 * フォームのデータを保存するメソッド,バリデーション機能でチェックする
+	 *
 	 * @param userDto
 	 * @return　redirect:/studentindex
 	 */
