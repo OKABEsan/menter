@@ -1,36 +1,50 @@
 package com.example.demo.model;
 
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
 /**
  * ユーザーのデータを一時的に保持し受け渡しをするクラス
  */
 public class UserDto {
-	@NotEmpty // ユーザー名は空であってはならないというルール
+	private Integer id;
+	@NotBlank(message = "名前は必須です")
 	private String username; // ユーザー名を保存するための場所
 
-	@NotEmpty
+	@NotNull
+	@Min(value = 0, message = "年齢は0歳以上で入力してください")
 	private Integer age;
 
-	@NotEmpty
+	@NotBlank(message = "生年月日は必須です")
+	@Pattern(regexp = "^\\d{4}/\\d{2}/\\d{2}$", message = "生年月日は0000/00/00の型式で入力してください")
 	private String birthday;
 
-	@NotEmpty // パスワードは空であってはならないというルール
 	private String password; // パスワードを保存するための場所
 
-	@NotEmpty // メールアドレスは空であってはならないというルール
+	@NotBlank(message = "メールアドレスは必須です")
 	private String email; // メールアドレスを保存するための場所
 
-	@NotEmpty
+	@Pattern(regexp = "^0\\d{1,4}-\\d{1,4}-\\d{3,4}$", message = "電話番号の型式が正しくありません")
 	private String tel;
 
 	@NotEmpty
 	private String plan;
-	
+
 	@NotEmpty
 	private String role;
 
 	// 以下は各値を取得するためのメソッド（ゲッター）です。
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	public String getUsername() {
 		return username; // ユーザー名を返す
 	}
@@ -86,11 +100,13 @@ public class UserDto {
 	public void setEmail(String email) {
 		this.email = email; // メールアドレスを設定する
 	}
+
 	public String getRole() {
 		return role;
 	}
+
 	public void setRole(String role) {
-		this.role=role;
+		this.role = role;
 	}
 
 }
