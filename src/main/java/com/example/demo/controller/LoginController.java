@@ -9,29 +9,29 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.example.demo.repository.UserRepository;
 
-@Controller //WebリクエストをSpringに処理してもらうための入口
 /**
  *ログイン画面の入力を受けとり、処理するクラス 
  */
+@Controller //WebリクエストをSpringに処理してもらうための入口
 public class LoginController {
 	@Autowired //自動でSQL操作クラスを作成
 	private UserRepository userRepository;
 
-	@GetMapping("/login") //URLと実行するメソッドを結びつけるための仕組み。
 	/**
 	 *ログインURLの保持
 	 * @return /loginn
 	 */
+	@GetMapping("/login") //URLと実行するメソッドを結びつけるための仕組み。
 	public String login() {
 
 		return "/login";
 	}
 
-	@GetMapping("/") //URLと実行するメソッドを結びつけるための仕組み
 	/**
 	 * ログインしているかチェックしてログイン中ならindex、ログインしてなければloginへ移動する。
 	 * @return redirect:/studentindex,redirect:/adminindex
 	 */
+	@GetMapping("/") //URLと実行するメソッドを結びつけるための仕組み
 	public String redirectToIndex() {
 		//今ログインしている状態のユーザー認証情報を取得する
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -57,13 +57,12 @@ public class LoginController {
 
 	}
 
-	@GetMapping("/student/index") //URLごとに処理するメソッドを指定する。
-
 	/**
 	 * modelにデータを入れる
 	 * @param model
 	 * @return studentindex
 	 */
+	@GetMapping("/student/index") //URLごとに処理するメソッドを指定する。
 	public String studentIndex(Model model) {
 
 		//modelにuserデータベースからみつけたstudentロールを渡す
@@ -72,12 +71,12 @@ public class LoginController {
 
 	}
 
-	@GetMapping("/admin/index")
 	/**
 	 * 
 	 * @param model
 	 * @return adminindex
 	 */
+	@GetMapping("/admin/index")
 	public String adminIndex(Model model) {
 
 		//modelにuserデータベースから見つけたadminロールを渡す
@@ -85,5 +84,5 @@ public class LoginController {
 		return "adminindex";
 
 	}
-	
+
 }

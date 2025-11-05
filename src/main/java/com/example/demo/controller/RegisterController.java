@@ -13,21 +13,20 @@ import com.example.demo.model.User;
 import com.example.demo.model.UserDto;
 import com.example.demo.service.UserService;
 
-@Controller // このクラスがWebコントローラーであることを示します
 /**
  * 新規登録の入力を受け、処理するクラス
  */
+@Controller // このクラスがWebコントローラーであることを示します
 public class RegisterController {
-
 	// Spring が自動的に UserService の実装を注入します
 	@Autowired
 	private UserService userService;
 
-	@GetMapping("/register") // "/register"というURLに対するGETリクエストを処理します
 	/**
 	 * データと画面を繋ぐ
 	 * @return mav
 	 */
+	@GetMapping("/register") // "/register"というURLに対するGETリクエストを処理します
 	public ModelAndView registerForm() {
 		ModelAndView mav = new ModelAndView(); // ModelAndViewオブジェクトを作成します
 		mav.addObject("user", new UserDto()); // 新しいUserDtoオブジェクトを"ユーザー"という名前で追加します
@@ -35,12 +34,12 @@ public class RegisterController {
 		return mav; // ModelAndViewオブジェクトを返します
 	}
 
-	@PostMapping("/register") // "/register"というURLに対するPOSTリクエストを処理します
 	/**
 	 * 入力された一時的に保持されたデータを認証し処理する
 	 * @param userDto
 	 * @return register login
 	 */
+	@PostMapping("/register") // "/register"というURLに対するPOSTリクエストを処理します
 	public String register(@ModelAttribute UserDto userDto, BindingResult bindingResult) {
 		//パスワードが存在しないときか、空文字の場合
 		if (userDto.getPassword() == null || userDto.getPassword().isEmpty()) {

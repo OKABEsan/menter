@@ -134,4 +134,5 @@ public class UserService implements UserDetailsService { // UserDetailsService�
 		userRepository.save(user); // UserRepositoryを使ってユーザーをデータベースに保存します
 
 	}
+
 }

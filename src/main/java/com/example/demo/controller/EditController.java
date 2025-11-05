@@ -15,41 +15,39 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.demo.model.UserDto;
 import com.example.demo.service.UserService;
 
-@Controller
 /**
  * 	ユーザーの編集機能を行うクラス
  */
+@Controller
 public class EditController {
-	//自動でUserserviceクラスの変数を追加
+	//UserServiceの依存性注入
 	@Autowired
 	private UserService userService;
 
-	@GetMapping("/student/edit/{id}")
 	/**
 	 * IDをもとにデータベースから1人分の情報を取り出す
 	 * @param id
 	 * @param model
 	 * @return student/edit.html
 	 */
+	@GetMapping("/student/edit/{id}")
 	public String showEditForm(@PathVariable Integer id, Model model) {
 		//userServiceで見つけたidをhtml上のデータベース表示に渡し、student/editページに返す。
 		model.addAttribute("user", userService.findById(id));
 
 		return "studentedit";
 	}
-	
-	//データを保存するリクエストを送る
-	@PostMapping("/student/save")
+
 	/**
-	 * フォームのデータを保存するメソッド,バリデーション機能でチェックする
-	 *
+	 * フォームのデータを保存するメソッド,バリデーション機能でチェックする	 *
 	 * @param userDto
 	 * @return　redirect:/studentindex
 	 */
+	@PostMapping("/student/save") //データを保存するリクエストを送る
 	public String saveUser(@Valid @ModelAttribute("user") UserDto userDto, BindingResult bindingResult,
 			RedirectAttributes redirectAttributes, Model model) {
-		//フォームにエラーがある場合
 
+		//フォームにエラーがある場合
 		try {
 			if (bindingResult.hasErrors()) {
 				//エラー内容の表示
