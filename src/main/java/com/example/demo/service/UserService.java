@@ -143,7 +143,7 @@ public class UserService implements UserDetailsService { // UserDetailsService�
 	@Transactional
 	public void deleteById(Integer id) {
 		Optional<User> user = userRepository.findById(id);
-
+		//データがあれば、deleteを実行
 		if (user.isPresent()) {
 			userRepository.delete(user.get());
 		}
