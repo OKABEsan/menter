@@ -37,6 +37,37 @@ body{
 		border-right:none;
 		
 		}
+	#confirmmodal{
+	    position:fixed;
+		top:0;
+		left:50%;
+		transform:translate(-50%);
+		
+	
+	}
+	.modal-content{
+		background-color:black;
+	}
+	.modal-content p{
+		color:white;
+		text-align:center;
+		margin-top:0;
+	}
+	.btn-box{
+		display:flex;
+		gap:10px;
+		justify-content:center;
+		padding:10px;
+	
+	}
+	.modal-cancel{		
+		width:86px;
+		height:36px;
+	}
+	.modal-okay{
+		width:86px;
+		height:36px;
+	}
 	
 	.modal-overlay{
 		display:none;
