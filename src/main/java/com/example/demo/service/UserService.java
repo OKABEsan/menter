@@ -13,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.mapper.UserMapper;
 import com.example.demo.model.User;
 import com.example.demo.model.UserDto;
 import com.example.demo.repository.UserRepository;
@@ -25,9 +26,12 @@ public class UserService implements UserDetailsService { // UserDetailsService�
 
 	@Autowired // Springが自動的にUserRepositoryの実装を注入します
 	private UserRepository userRepository;
-
+	
 	@Autowired // Springが自動的にPasswordEncoderの実装を注入します
 	private PasswordEncoder passwordEncoder;
+	
+	@Autowired
+	private UserMapper userMapper;
 
 	@Override // UserDetailsServiceインターフェースのメソッドを上書きします
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
