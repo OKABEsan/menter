@@ -30,4 +30,10 @@ public class UserSearchForm {
 
 	private String loginRole;
 
+	public boolean isEmpty() {
+		// TODO 自動生成されたメソッド・スタブ
+		return false;
+	}
+
+	
 }

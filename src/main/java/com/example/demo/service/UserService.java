@@ -26,12 +26,9 @@ public class UserService implements UserDetailsService { // UserDetailsService�
 
 	@Autowired // Springが自動的にUserRepositoryの実装を注入します
 	private UserRepository userRepository;
-	
+
 	@Autowired // Springが自動的にPasswordEncoderの実装を注入します
 	private PasswordEncoder passwordEncoder;
-	
-	@Autowired
-	private UserMapper userMapper;
 
 	@Override // UserDetailsServiceインターフェースのメソッドを上書きします
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -137,6 +134,16 @@ public class UserService implements UserDetailsService { // UserDetailsService�
 		}
 		userRepository.save(user); // UserRepositoryを使ってユーザーをデータベースに保存します
 
+	}
+
+	@Autowired //SpringがMapperの実装を注入
+	private UserMapper userMapper;
+	/**
+	 * ユーザー一覧のリストで、Mapperで選択された情報を全件取得する処理
+	 * @return userMapper.selectAll();
+	 */
+	public List<User> findAll() {
+		return userMapper.selectAll();
 	}
 
 }

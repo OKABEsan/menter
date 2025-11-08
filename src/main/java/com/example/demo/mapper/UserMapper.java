@@ -15,5 +15,8 @@ public interface UserMapper {
 	
 	List<User>searchUsers(UserSearchForm form);
 
+	List<User> selectAll();
+
+
 
 }
