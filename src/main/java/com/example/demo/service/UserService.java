@@ -1,6 +1,7 @@
 package com.example.demo.service; // このファイルが属するパッケージ（フォルダ）
 
 import java.util.List;
+import java.util.Optional;
 
 // 必要なクラスをインポートします
 import jakarta.transaction.Transactional;
@@ -137,6 +138,7 @@ public class UserService implements UserDetailsService { // UserDetailsService�
 
 	}
 
+<<<<<<< HEAD
 	@Autowired //SpringがMapperの実装を注入
 	private UserMapper userMapper;
 
@@ -156,6 +158,19 @@ public class UserService implements UserDetailsService { // UserDetailsService�
 	public List<User> search(UserSearchForm userSearchForm) {
 
 		return null;
+=======
+	/**
+	 * 
+	 * @param id
+	 */
+	@Transactional
+	public void deleteById(Integer id) {
+		Optional<User> user = userRepository.findById(id);
+		//データがあれば、deleteを実行
+		if (user.isPresent()) {
+			userRepository.delete(user.get());
+		}
+>>>>>>> feature/delete
 	}
 
 }
