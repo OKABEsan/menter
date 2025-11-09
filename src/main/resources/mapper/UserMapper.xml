@@ -4,12 +4,33 @@
 <mapper namespace="com.example.demo.mapper.UserMapper">
 
 
-	<select id="selectAll" resultType="User">
+	<select id="search" resultType="User">
 		SELECT * FROM user
 		WHERE 1 =1
 
-		<if test="username != null and username !=''">
-			AND username LIKE CONCAT('%', #{username},'%');
+		<if test="form.username != null and form.username !=''">
+			AND username LIKE CONCAT('%', #{form.username},'%');
+		</if>
+
+		<if test="form.age != null and form.age !=''">
+			AND age=#{form.age}
+		</if>
+
+		<if test="form.birthday!= null and form.birthday !=''"> 
+		AND birthday=#{form.birthday}
+		</if>
+
+
+		<if test="form.email != null and form.email !=''">
+		AND email=#{form.email}
+		</if>
+
+		<if test="form.tel!= null and form.tel !=''">
+		AND tel=#{form.tel}
+		</if>
+
+		<if test="form.plan!= null and form.plan !=''">
+		AND plan=#{plan}
 		</if>
 	</select>
 </mapper>

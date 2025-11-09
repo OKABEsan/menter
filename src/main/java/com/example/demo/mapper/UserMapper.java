@@ -13,10 +13,8 @@ import com.example.demo.model.UserSearchForm;
 public interface UserMapper {
 	
 	
-	List<User>searchUsers(UserSearchForm form);
+	List<User>search(UserSearchForm form);
 
 	List<User> selectAll();
-
-
 
 }

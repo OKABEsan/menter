@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-import com.example.demo.mapper.UserMapper;
 import com.example.demo.model.User;
 import com.example.demo.model.UserSearchForm;
 import com.example.demo.service.UserService;
@@ -17,14 +16,9 @@ import com.example.demo.service.UserService;
  * 一覧を表示し検索の入力を受け画面へ繋ぐクラス
  */
 @Controller
-public class UserListController {
+public class SearchController {
 	@Autowired
 	private UserService userService;
-
-	@Autowired
-	private UserMapper userMapper;
-
-	
 
 	/**
 	 * ユーザー検索フォームに検索用情報を繋ぎ、検索フォーム画面に返す（検索前の空のフォームを表示）
@@ -32,7 +26,7 @@ public class UserListController {
 	 * @return /student/search"
 	 */
 	@GetMapping("/student/search")
-	public String studentSearch(@ModelAttribute UserSearchForm usersearchform) {
+	public String studentSearch(@ModelAttribute UserSearchForm form) {
 
 		return "/student/search";
 	}
@@ -42,17 +36,17 @@ public class UserListController {
 	 * @return "/student/search/result"
 	 */
 	@GetMapping("/student/search/result")
-	public String studentSearchResult(@ModelAttribute UserSearchForm userSearchForm, Model model) {
+	public String studentSearchResult(@ModelAttribute UserSearchForm form, Model model) {
 		//検索フォームの情報が空の場合
-		if (userSearchForm.isEmpty()) {
+		if (form.isEmpty()) {
 			//検索ページへ返す
 			return "/student/search";
 
 		} else {
 			//フォームの値を検索してリストへ入れる
-			List<User>list=userService.search(userSearchForm);
+			List<User> list = userService.search(form);
 			//検索結果をhtmlへ繋ぐ処理
-			model.addAttribute("userList",list);
+			model.addAttribute("userList", list);
 
 			//検索結果の表示
 			return "/student/search/result";
