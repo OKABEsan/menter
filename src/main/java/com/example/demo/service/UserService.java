@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.mapper.UserMapper;
 import com.example.demo.model.User;
 import com.example.demo.model.UserDto;
+import com.example.demo.model.UserSearchForm;
 import com.example.demo.repository.UserRepository;
 
 /**
@@ -138,12 +139,23 @@ public class UserService implements UserDetailsService { // UserDetailsService�
 
 	@Autowired //SpringがMapperの実装を注入
 	private UserMapper userMapper;
+
 	/**
 	 * ユーザー一覧のリストで、Mapperで選択された情報を全件取得する処理
 	 * @return userMapper.selectAll();
 	 */
 	public List<User> findAll() {
 		return userMapper.selectAll();
+	}
+
+	/**
+	 * 検索フォームの情報を検索する処理
+	 * @param userSearchForm
+	 * @return
+	 */
+	public List<User> search(UserSearchForm userSearchForm) {
+
+		return null;
 	}
 
 }

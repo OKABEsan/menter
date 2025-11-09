@@ -20,24 +20,11 @@ import com.example.demo.service.UserService;
 public class UserListController {
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private UserMapper userMapper;
-	/**
-	 * 
-	 * @param model
-	 * @return studentindex
-	 */
-	@GetMapping("/student/index") //(生徒の一覧ページ）
-	public String studentIndex(Model model) {
-		
-		List<User>list=userService.findAll();
-		
-		model.addAttribute("userList",list);
-		
-		return "studentindex";
-	}
 
+	
 
 	/**
 	 * ユーザー検索フォームに検索用情報を繋ぎ、検索フォーム画面に返す（検索前の空のフォームを表示）
@@ -62,9 +49,15 @@ public class UserListController {
 			return "/student/search";
 
 		} else {
+			//フォームの値を検索してリストへ入れる
+			List<User>list=userService.search(userSearchForm);
+			//検索結果をhtmlへ繋ぐ処理
+			model.addAttribute("userList",list);
+
+			//検索結果の表示
 			return "/student/search/result";
 
 		}
-		
+
 	}
 }
