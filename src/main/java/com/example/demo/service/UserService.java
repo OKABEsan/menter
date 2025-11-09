@@ -17,7 +17,6 @@ import org.springframework.stereotype.Service;
 import com.example.demo.mapper.UserMapper;
 import com.example.demo.model.User;
 import com.example.demo.model.UserDto;
-import com.example.demo.model.UserSearchForm;
 import com.example.demo.repository.UserRepository;
 
 /**
@@ -138,7 +137,7 @@ public class UserService implements UserDetailsService { // UserDetailsService�
 
 	}
 
-<<<<<<< HEAD
+
 	@Autowired //SpringがMapperの実装を注入
 	private UserMapper userMapper;
 
@@ -151,15 +150,6 @@ public class UserService implements UserDetailsService { // UserDetailsService�
 	}
 
 	/**
-	 * 検索フォームの情報を検索する処理
-	 * @param userSearchForm
-	 * @return
-	 */
-	public List<User> search(UserSearchForm userSearchForm) {
-
-		return null;
-=======
-	/**
 	 * 
 	 * @param id
 	 */
@@ -170,7 +160,7 @@ public class UserService implements UserDetailsService { // UserDetailsService�
 		if (user.isPresent()) {
 			userRepository.delete(user.get());
 		}
->>>>>>> feature/delete
+
 	}
 
 }
