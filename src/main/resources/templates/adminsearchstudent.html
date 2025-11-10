@@ -5,7 +5,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form>
+	
+	<form th:action="@{/admin/search/result}"method="get">
 	<label for="username">名前</label></br>
 			<input type="text" id="username" name="username" ></br>
 			
@@ -25,6 +26,7 @@
 		 
 		<button type="submit">検索</button>
 	</form>
+
 	
 </body>
 </html>

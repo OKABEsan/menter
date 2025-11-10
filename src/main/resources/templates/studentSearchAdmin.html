@@ -5,12 +5,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form>
-		<div class="main-content">F
-			<form action="@{/student/search}"method="get">
-				<input type="text"name="keyword"placeholder="名前を入力">
-				<button type="submit">検索</button>
-		</div>
+
+	<form th: action="@{/student/search/result}"method="get">
+		<input type="text"name="keyword"placeholder="名前を入力">
+	
 	<label for="username">名前</label></br>
 		<input type="text" id="username" name="username" ></br>
 		
@@ -25,10 +23,10 @@
 		 
 	 <label for="tel">TEL</label></br>
 		<input type="tel" id="tel" name="tel" ></br>
-		
-	 
+	
 	<button type="submit">検索</button>
 	</form>
+
 
 </body>
 </html>

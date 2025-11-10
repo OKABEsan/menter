@@ -76,3 +76,7 @@ body{
 	.modal-overlay.present{
 		display:block
 	}
+	.adminSearchStudent{
+		width:100%;
+		height:100%;
+	}
