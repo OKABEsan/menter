@@ -28,7 +28,7 @@ public class StudentSearchAdminController {
 	@GetMapping("/student/search/admin")
 	public String studentSearch(@ModelAttribute UserSearchForm form) {
 
-		return "/student/search/admin";
+		return "studentsearchadmin";
 	}
 
 	/**
@@ -40,7 +40,7 @@ public class StudentSearchAdminController {
 		//検索フォームの情報が空の場合
 		if (form.isEmpty()) {
 			//検索ページへ返す
-			return "/student/search/admin";
+			return "studentsearchadmin";
 
 		} else {
 			//フォームの値を検索してリストへ入れる

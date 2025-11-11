@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import com.example.demo.model.User;
 import com.example.demo.model.UserSearchForm;
 import com.example.demo.service.UserService;
-
+@Controller
 public class AdminSearchStudentController {
 	@Autowired
 	private UserService userService;
@@ -23,7 +24,7 @@ public class AdminSearchStudentController {
 	@GetMapping("/admin/search/student")
 	public String adminSearch(@ModelAttribute UserSearchForm form) {
 
-		return "adminSearchStudent";
+		return "adminsearchstudent";
 	}
 
 	/**
@@ -35,7 +36,7 @@ public class AdminSearchStudentController {
 		//検索フォームの情報が空の場合
 		if (form.isEmpty()) {
 			//検索ページへ返す
-			return "adminSearchStudent";
+			return "adminsearchstudent";
 
 		} else {
 			//フォームの値を検索してリストへ入れる
