@@ -45,7 +45,7 @@ public class AdminSearchStudentController {
 			model.addAttribute("userList", list);
 
 			//検索結果の表示
-			return "adminSearchResult";
+			return "adminsearchresult";
 
 		}
 
