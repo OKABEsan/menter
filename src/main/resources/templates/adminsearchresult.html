@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -19,7 +19,7 @@
 			<th>TEL</th>
 			<th>プラン名</th>
 		</tr>
-		 <tr th:each="user:${userlist}">
+		 <tr th:each="user : ${userList}">
 			<td th:text="${user.username}"></td>
 			<td th:text="${user.age}"></td>
 			<td th:text="${user.birthday}"></td>
