@@ -29,13 +29,13 @@ public class AdminSearchStudentController {
 
 	/**
 	 * 検索結果とデータベースを繋ぎ、検索結果URLに返す（検索結果を表示）
-	 * @return "/student/search/result"
+	 * @return "/admin/search/result"
 	 */
 	@GetMapping("/admin/search/result")
 	public String admintSearchResult(@ModelAttribute UserSearchForm form, Model model) {
 		//検索フォームの情報が空の場合
 		if (form.isEmpty()) {
-			model.addAttribute("errorMessage", "データが見つかりませんでした。");
+			model.addAttribute("errorMessage", "検索項目を1つでも入力してください。");
 			//検索ページへ返す
 			return "adminsearchresult";
 
@@ -43,6 +43,9 @@ public class AdminSearchStudentController {
 			//フォームの値を検索してリストへ入れる
 			List<User> list = userService.search(form);
 			//検索結果をhtmlへ繋ぐ処理
+			if(list.isEmpty()) {
+				model.addAttribute("errorMessage","データが見つかりませんでした。");
+			}
 			model.addAttribute("userList", list);
 
 			//検索結果の表示

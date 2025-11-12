@@ -30,10 +30,16 @@ public class UserSearchForm {
 
 	private String loginRole;
 
+	//全て空欄の時trueを返す
 	public boolean isEmpty() {
-		// TODO 自動生成されたメソッド・スタブ
-		return false;
+
+		return (username == null || username.isEmpty()) &&
+				(age == null) &&
+				(birthday == null || birthday.isEmpty()) &&
+				(email == null || email.isEmpty()) &&
+				(tel == null || tel.isEmpty()) &&
+				(plan == null || plan.isEmpty());
+
 	}
 
-	
 }
