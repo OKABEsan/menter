@@ -39,6 +39,18 @@ public class EditController {
 	}
 
 	/**
+	 * //生徒のデータを削除する
+	 * @param id
+	 * @return "rederect:/student/delete/{id}"
+	 */
+	@PostMapping("/student/delete/{id}")
+	public String deleteEditForm(@PathVariable Integer id) {
+		userService.deleteById(id);
+
+		return "redirect:/student/index";
+	}
+
+	/**
 	 * フォームのデータを保存するメソッド,バリデーション機能でチェックする	 *
 	 * @param userDto
 	 * @return　redirect:/studentindex

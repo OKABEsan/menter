@@ -1,6 +1,7 @@
 package com.example.demo.service; // このファイルが属するパッケージ（フォルダ）
 
 import java.util.List;
+import java.util.Optional;
 
 // 必要なクラスをインポートします
 import jakarta.transaction.Transactional;
@@ -133,6 +134,19 @@ public class UserService implements UserDetailsService { // UserDetailsService�
 		}
 		userRepository.save(user); // UserRepositoryを使ってユーザーをデータベースに保存します
 
+	}
+
+	/**
+	 * 
+	 * @param id
+	 */
+	@Transactional
+	public void deleteById(Integer id) {
+		Optional<User> user = userRepository.findById(id);
+		//データがあれば、deleteを実行
+		if (user.isPresent()) {
+			userRepository.delete(user.get());
+		}
 	}
 
 }
