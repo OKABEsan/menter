@@ -39,17 +39,22 @@ public class StudentSearchAdminController {
 	public String studentSearchResult(@ModelAttribute UserSearchForm form, Model model) {
 		//検索フォームの情報が空の場合
 		if (form.isEmpty()) {
+			model.addAttribute("errorMessage", "検索項目を1つでも入力してください。");
 			//検索ページへ返す
 			return "studentsearchadmin";
 
 		} else {
 			//フォームの値を検索してリストへ入れる
 			List<User> list = userService.search(form);
+			if (list.isEmpty()) {
+				model.addAttribute("errorMessage", "データが見つかりませんでした。");
+			}
+
 			//検索結果をhtmlへ繋ぐ処理
 			model.addAttribute("userList", list);
 
 			//検索結果の表示
-			return "/student/search/result";
+			return "studentsearchresult";
 
 		}
 

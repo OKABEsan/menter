@@ -36,6 +36,7 @@ public class AdminSearchStudentController {
 		//検索フォームの情報が空の場合
 		if (form.isEmpty()) {
 			model.addAttribute("errorMessage", "検索項目を1つでも入力してください。");
+		
 			//検索ページへ返す
 			return "adminsearchresult";
 
