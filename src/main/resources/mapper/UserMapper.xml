@@ -4,7 +4,8 @@
 
 <mapper namespace="com.example.demo.mapper.UserMapper">
 
-	<select id="search" resultType="com.example.demo.model.User">
+	<select id="searchStudent"
+		resultType="com.example.demo.model.User">
 		SELECT * FROM user
 		WHERE 1=1
 		AND role='ROLE_STUDENT'
@@ -31,6 +32,34 @@
 
 		<if test="plan != null and plan != ''">
 			AND plan = #{plan}
+		</if>
+
+	</select>
+
+	<select id="searchAdmin"
+		resultType="com.example.demo.model.User">
+		SELECT * FROM user
+		WHERE 1=1
+		AND role='ROLE_ADMIN'
+
+		<if test="username != null and username != ''">
+			AND username LIKE CONCAT('%', #{username}, '%')
+		</if>
+
+		<if test="age != null and age != ''">
+			AND age = #{age}
+		</if>
+
+		<if test="birthday != null and birthday != ''">
+			AND birthday = #{birthday}
+		</if>
+
+		<if test="email != null and email != ''">
+			AND email = #{email}
+		</if>
+
+		<if test="tel != null and tel != ''">
+			AND tel = #{tel}
 		</if>
 
 	</select>

@@ -41,11 +41,11 @@ public class StudentSearchAdminController {
 		if (form.isEmpty()) {
 			model.addAttribute("errorMessage", "検索項目を1つでも入力してください。");
 			//検索ページへ返す
-			return "studentsearchadmin";
+			return "studentsearchresult";
 
 		} else {
 			//フォームの値を検索してリストへ入れる
-			List<User> list = userService.search(form);
+			List<User> list = userService.searchAdmin(form);
 			if (list.isEmpty()) {
 				model.addAttribute("errorMessage", "データが見つかりませんでした。");
 			}

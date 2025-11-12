@@ -42,7 +42,7 @@ public class AdminSearchStudentController {
 
 		} else {
 			//フォームの値を検索してリストへ入れる
-			List<User> list = userService.search(form);
+			List<User> list = userService.searchStudent(form);
 			//検索結果をhtmlへ繋ぐ処理
 			if(list.isEmpty()) {
 				model.addAttribute("errorMessage","データが見つかりませんでした。");

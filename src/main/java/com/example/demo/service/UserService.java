@@ -168,9 +168,12 @@ public class UserService implements UserDetailsService { // UserDetailsServiceã‚
 	 * @param form
 	 * @return
 	 */
-	public List<User> search(UserSearchForm form) {
+	public List<User> searchStudent(UserSearchForm form) {
 
-		return userMapper.search(form);
+		return userMapper.searchStudent(form);
+	}
+	public List<User> searchAdmin(UserSearchForm form){
+		return userMapper.searchAdmin(form);
 	}
 
 }
