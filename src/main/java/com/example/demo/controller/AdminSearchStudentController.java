@@ -35,8 +35,9 @@ public class AdminSearchStudentController {
 	public String admintSearchResult(@ModelAttribute UserSearchForm form, Model model) {
 		//検索フォームの情報が空の場合
 		if (form.isEmpty()) {
+			model.addAttribute("errorMessage", "データが見つかりませんでした。");
 			//検索ページへ返す
-			return "adminsearchstudent";
+			return "adminsearchresult";
 
 		} else {
 			//フォームの値を検索してリストへ入れる
