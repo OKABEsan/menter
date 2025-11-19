@@ -44,7 +44,7 @@ public class EditController {
 	 * @param id
 	 * @return "rederect:/student/delete/{id}"
 	 */
-	@PostMapping("/student/delete/{id}")
+	@PostMapping("/student/delete")
 	public String deleteEditForm(@RequestParam ("id")Integer id) {
 		userService.deleteById(id);
 
