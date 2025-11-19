@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>検索結果一覧</h1>
+	<div>
+		<p th:if="${errorMessage}"th:text="${errorMessage}"style="color:red;"></p>
+	</div>
+	<div class="table">
+	  <table class="table"border="1">
+		<tr>
+			<th>名前	</th>
+			<th>年齢</th>
+			<th>生年月日</th>
+			<th>email</th>
+			<th>TEL</th>
+			<th>プラン名</th>
+		</tr>
+		 <tr th:each="user : ${userList}">
+			<td th:text="${user.username}"></td>
+			<td th:text="${user.age}"></td>
+			<td th:text="${user.birthday}"></td>
+			<td th:text="${user.email}"></td>
+			<td th:text="${user.tel}"></td>
+			<td th:text="${user.plan}"></td>
+		</tr>	
+	 </table>
+</body>
+</html>

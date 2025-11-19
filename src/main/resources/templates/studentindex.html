@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet"th:href="@{/style.css}"/>
+</head>
+<body>
+  <div class="esaImg">
+	<div class="esa">
+    <img src="/img/logo.png"alt="ESA画像">
+	</div>
+	<div th:if="${successMessage}"style="color:green;">
+		<p th:text="${successMessage}"></p>
+	</div>
+	<div th:if="${errorMessage}"style="color:red;">
+		<p th:text="${errorMessage}"></p>
+		</div>
+		</br>
+	<div class="main-content">
+	<form action=""method="get">
+		<input type="text"name="keyword"placeholder="名前を入力">
+		<button type="submit">検索</button>
+	</form>
+ <div class="table">
+  <table class="table"border="1">
+	<tr>
+		<th>名前	</th>
+		<th>年齢</th>
+		<th>生年月日</th>
+		<th>email</th>
+		<th>TEL</th>
+		<th>プラン名</th>
+	</tr>
+	 <tr th:each="user:${user}"></td>
+		<td th:text="${user.username}"></td>
+		<td th:text="${user.age}"></td>
+		<td th:text="${user.birthday}"></td>
+		<td th:text="${user.email}"></td>
+		<td th:text="${user.tel}"></td>
+		<td th:text="${user.plan}"></td>
+		<td>	
+			<form th:action="@{/student/edit/{id}(id=${user.id})}" method="get"style="display:inline;">
+				<button type="submit"class="edit-btn">編集</button>
+			</form>
+			<!--削除ボタンを押すとモーダルが出る-->	
+			<button type="submit" class="delete-btn">削除</button>
+			<div id="confirmmodal"class="modal-overlay">
+			  <div class=modal-content>
+				<p>本当に削除しますか？</p>
+				<!--キャンセルで一覧に戻る-->
+			  <div class="btn-box"> 
+			        <button type="button" class="modal-cancel">キャンセル</button>
+				<!---OKを押すと削除処理-->
+			   <form th:action="@{/student/delete/{id}(id=${user.id})}"method="post"style="display inline;">
+				<form th:action="@{/deleteStudent}" method="post">
+					<input type="hidden" name="id" th:value="${user.id}" />
+			        <button type="submit" class="modal-okay">OK</button>
+			   </form>
+			  </div>
+			 </div>
+			 
+		</td>
+	</tr>
+ </table>
+ 　　　　<a href="/student/search/admin">講師検索</a>
+</div>
+		</div>
+		</div>
+		</div>
+		<script th:src="@{/deletemodal.js}"></script>
+</body>
+</html>
