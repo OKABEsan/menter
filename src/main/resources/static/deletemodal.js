@@ -2,13 +2,13 @@
 const modalCancelBtn=document.querySelector(".modal-cancel");
 const deleteBtns=document.querySelectorAll(".delete-btn");
 const modalOverlay=document.querySelector(".modal-overlay");
-const deleteUserId=document.getElementById("deleteUserId");
+const modalUserId=document.getElementById("modalUserId");
 
 deleteBtns.forEach((btn)=>{
 	
 	btn.addEventListener("click",()=>{
-	const id=btn.getAttribute("delete-id");
-	deleteUserId.value=id;
+	const id=btn.getAttribute("data-id");
+	modalUserId.value=id;
 	modalOverlay.classList.add("present");
 	
   });
@@ -16,6 +16,6 @@ deleteBtns.forEach((btn)=>{
 
 modalCancelBtn.addEventListener("click",()=>{
 	
-　window.location.href="/student/index";	
+　modalOverlay.classList.remove("present");
  
 });
