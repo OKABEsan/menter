@@ -54,7 +54,7 @@
 				<!---OKを押すと削除処理-->
 			   <form th:action="@{/student/delete/{id}(id=${user.id})}"method="post"style="display inline;">
 				<form th:action="@{/deleteStudent}" method="post">
-					<input type="hidden" name="id" th:value="${user.id}" />
+					<input type="button" name="id" th:value="${user.id}" />
 			        <button type="submit" class="modal-okay">OK</button>
 			   </form>
 			  </div>
