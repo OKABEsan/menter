@@ -48,6 +48,10 @@ body{
 	.modal-content{
 		background-color:black;
 	}
+	.area{
+		display:flex;
+		
+	}
 	.modal-content p{
 		color:white;
 		text-align:center;
