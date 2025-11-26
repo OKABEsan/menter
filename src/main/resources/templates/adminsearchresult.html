@@ -1,17 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="esaImg">
-		<div class="esa">
-			<hi class=menter>講師一覧</h1>
-		</div>
-		<div class="main-content">
-	  <div class="table">
-	<table class="table"border="1">
+	<h1>検索結果一覧</h1>
+	<div>
+		<p th:if="${errorMessage}"th:text="${errorMessage}"style="color:red;"></p>
+	</div>
+	<div class="table">
+	  <table class="table"border="1">
 		<tr>
 			<th>名前	</th>
 			<th>年齢</th>
@@ -20,26 +19,14 @@
 			<th>TEL</th>
 			<th>プラン名</th>
 		</tr>
-		 <tr th:each="user:${user}">
+		 <tr th:each="user : ${userList}">
 			<td th:text="${user.username}"></td>
 			<td th:text="${user.age}"></td>
 			<td th:text="${user.birthday}"></td>
 			<td th:text="${user.email}"></td>
 			<td th:text="${user.tel}"></td>
 			<td th:text="${user.plan}"></td>
-			<td>
-				<button class="edit-btn">編集</button>
-				<button class="delete-btn">削除</button>
-				</td>
-		</tr>
-	</table>
-	<a href="/admin/search/student">生徒検索</a>
-	</br>
-	</br>
-	<a href="/login">ホーム</a>
-			</div>
-			</div>
-			</div>
-
+		</tr>	
+	 </table>
 </body>
 </html>

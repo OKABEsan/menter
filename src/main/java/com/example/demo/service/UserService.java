@@ -14,8 +14,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.mapper.UserMapper;
 import com.example.demo.model.User;
 import com.example.demo.model.UserDto;
+import com.example.demo.model.UserSearchForm;
 import com.example.demo.repository.UserRepository;
 
 /**
@@ -137,6 +139,14 @@ public class UserService implements UserDetailsService { // UserDetailsService�
 	}
 
 	/**
+	 * ユーザー一覧のリストで、Mapperで選択された情報を全件取得する処理
+	 * @return userMapper.selectAll();
+	 */
+	public List<User> findAll() {
+		return userMapper.selectAll();
+	}
+
+	/**
 	 * 
 	 * @param id
 	 */
@@ -147,6 +157,23 @@ public class UserService implements UserDetailsService { // UserDetailsService�
 		if (user.isPresent()) {
 			userRepository.delete(user.get());
 		}
+
+	}
+
+	@Autowired //SpringがMapperの実装を注入
+	private UserMapper userMapper;
+
+	/**
+	 * フォームに入力されたユーザー情報をmapperへ渡す
+	 * @param form
+	 * @return
+	 */
+	public List<User> searchStudent(UserSearchForm form) {
+
+		return userMapper.searchStudent(form);
+	}
+	public List<User> searchAdmin(UserSearchForm form){
+		return userMapper.searchAdmin(form);
 	}
 
 }

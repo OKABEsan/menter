@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
 import com.example.demo.model.User;
 
 /**
- * データベース操作を行うクラス。保存、更新、削除、検索
+ * データベースとやりとりを行いデータを取得、保存するクラス
  */
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {

@@ -48,6 +48,10 @@ body{
 	.modal-content{
 		background-color:black;
 	}
+	.area{
+		display:flex;
+		
+	}
 	.modal-content p{
 		color:white;
 		text-align:center;
@@ -75,4 +79,8 @@ body{
 	}
 	.modal-overlay.present{
 		display:block
+	}
+	.adminSearchStudent{
+		width:100%;
+		height:100%;
 	}
