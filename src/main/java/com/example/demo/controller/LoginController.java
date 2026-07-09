@@ -24,7 +24,7 @@ public class LoginController {
 	@GetMapping("/login") //URLと実行するメソッドを結びつけるための仕組み。
 	public String login() {
 
-		return "/login";
+		return "login";
 	}
 
 	/**
